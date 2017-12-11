@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_swap_int.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 23:22:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/26 01:54:21 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/26 01:54:21 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include <stdio.h>
-
-int				main(int argc, char **argv)
+void	ft_swap_int(int *a, int *b)
 {
-	char	**files;
-	char	*options;
-
-	options = get_options(argc, &argv[1]);
-	ft_putstr(options);
-	files = read_dir(argv[1]);
-	return (0);
+	*a += *b;
+	*b = *a - *b;
+	*a -= *b;
 }

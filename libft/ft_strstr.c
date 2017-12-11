@@ -1,26 +1,43 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_strstr.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 23:22:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/26 01:54:21 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/26 01:54:21 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include <stdio.h>
+#include "libft.h"
 
-int				main(int argc, char **argv)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	char	**files;
-	char	*options;
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	char	*pointer;
 
-	options = get_options(argc, &argv[1]);
-	ft_putstr(options);
-	files = read_dir(argv[1]);
-	return (0);
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	i = 0;
+	pointer = NULL;
+	while (haystack[i])
+	{
+		j = 0;
+		k = i;
+		pointer = (char *)&haystack[i];
+		while (needle[j])
+		{
+			if (needle[j] != haystack[k++])
+				break ;
+			if (needle[j++ + 1] == '\0')
+				return (pointer);
+		}
+		pointer = NULL;
+		i += 1;
+	}
+	return (pointer);
 }

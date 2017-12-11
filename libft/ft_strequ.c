@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_strequ.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 23:22:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/26 01:54:20 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/26 01:54:20 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include <stdio.h>
+#include "libft.h"
 
-int				main(int argc, char **argv)
+int		ft_strequ(char const *s1, char const *s2)
 {
-	char	**files;
-	char	*options;
-
-	options = get_options(argc, &argv[1]);
-	ft_putstr(options);
-	files = read_dir(argv[1]);
-	return (0);
+	if (s1 == NULL || s2 == NULL)
+		return (0);
+	while (*s1 && *s2)
+	{
+		if (*s1++ != *s2++)
+			return (0);
+	}
+	return (*s1 == *s2 ? 1 : 0);
 }

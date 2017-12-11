@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_lstdelone.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 23:22:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/26 01:54:19 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/26 01:54:19 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include <stdio.h>
+#include "libft.h"
 
-int				main(int argc, char **argv)
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
-	char	**files;
-	char	*options;
+	t_list *list;
 
-	options = get_options(argc, &argv[1]);
-	ft_putstr(options);
-	files = read_dir(argv[1]);
-	return (0);
+	list = *alst;
+	del(list->content, list->content_size);
+	free(list);
+	*alst = NULL;
 }

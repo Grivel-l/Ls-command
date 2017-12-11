@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_tablen.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 23:22:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/12/11 18:02:51 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/12/11 18:56:17 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include <stdio.h>
+#include "libft.h"
 
-int				main(int argc, char **argv)
+size_t	ft_tablen(char **tab)
 {
-	char	**files;
-	char	*options;
+	size_t	i;
 
-	options = get_options(argc, &argv[1]);
-	ft_putstr(options);
-	files = read_dir(argv[1]);
-	return (0);
+	i = 0;
+	while (tab[i])
+		i += 1;
+	return (i);
 }

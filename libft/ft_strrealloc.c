@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_realloc.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 23:22:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/12/11 17:35:29 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/12/11 17:56:33 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include <stdio.h>
+#include "libft.h"
 
-int				main(int argc, char **argv)
+char	*ft_strrealloc(char *str, char *to_append)
 {
-	char	**files;
-	char	*options;
+	char	*tmp;
+	char	*str_pointer;
+	char	*tmp_pointer;
 
-	options = get_options(argc, &argv[1]);
-	ft_putstr(options);
-	files = read_dir(argv[1]);
-	return (0);
+	if (str == NULL || to_append == NULL ||
+			(tmp = malloc(ft_strlen(str) + ft_strlen(to_append) + 1)) == NULL)
+		return (NULL);
+	str_pointer = str;
+	tmp_pointer = tmp;
+	while (*str)
+		*tmp++ = *str++;
+	ft_strdel(&str_pointer);
+	while (*to_append)
+		*tmp++ = *to_append++;
+	*tmp = '\0';
+	return (tmp_pointer);
 }

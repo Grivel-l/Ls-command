@@ -1,26 +1,43 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_strlcat.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 23:22:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/26 01:54:21 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/26 01:54:21 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-#include <stdio.h>
+#include "libft.h"
 
-int				main(int argc, char **argv)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	char	**files;
-	char	*options;
+	char	*dest;
+	char	*source;
+	size_t	i;
+	size_t	j;
 
-	options = get_options(argc, &argv[1]);
-	ft_putstr(options);
-	files = read_dir(argv[1]);
-	return (0);
+	i = 0;
+	dest = dst;
+	source = (char *)src;
+	while (i++ < size && *dest)
+		dest += 1;
+	j = dest - dst;
+	i = size - j;
+	if (i == 0)
+		return (j + ft_strlen(source));
+	while (*source)
+	{
+		if (i != 1)
+		{
+			*dest++ = *source;
+			i -= 1;
+		}
+		source += 1;
+	}
+	*dest = '\0';
+	return (j + (source - src));
 }
