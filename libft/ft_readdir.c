@@ -13,7 +13,7 @@
 
 #include "libft.h"
 
-char	**read_dir(char *filename)
+char	**ft_readdir(char *filename)
 {
 	DIR				*dir;
 	char			**all_dirs;

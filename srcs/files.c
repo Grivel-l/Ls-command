@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_ls.h                                          .::    .:/ .      .::   */
+/*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 23:23:45 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/12/11 23:22:23 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include "ft_ls.h"
 
-#include <dirent.h>
-#include <stdlib.h>
-#include "../libft/libft.h"
-
-typedef struct	s_file
+void	get_all_files(int argc, char **argv, char *options, t_file **files)
 {
-	char		*path;
-	char		*filename;
-}				s_file;
+	size_t	i;
 
-typedef struct	s_arg
-{
-	t_file		*files;
-	size_t		is_file;
-	char		*arg_name;
-	t_file		*file_info;
-}				t_arg;
+	i = 1;
+	while (i < argc)
+	{
 
-char			*get_options(int argc, char **argv);
-void			get_all_files(int argc, char **argv,
-			char *options, t_arg **files);
-
-#endif
+		i += 1;
+	}
+}

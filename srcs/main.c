@@ -14,7 +14,7 @@
 #include "ft_ls.h"
 #include <stdio.h>
 
-void	free_stuff(char *options, char **files)
+static void	free_stuff(char *options, char **files)
 {
 	size_t	i;
 
@@ -25,14 +25,14 @@ void	free_stuff(char *options, char **files)
 	free(files);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
-	char	**files;
+	t_arg	*files;
 	char	*options;
 
 	options = get_options(argc, &argv[1]);
-	ft_putstr(options);
-	files = read_dir(argv[1]);
+	get_all_files(argc, argv, options, &files);
+	ft_puttab(files);
 	free_stuff(options, files);
 	return (0);
 }

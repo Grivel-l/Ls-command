@@ -139,7 +139,7 @@ char				*ft_strrealloc(char *str, char *to_append);
 /*
 ** Misc
 */
-char				**read_dir(char *filename);
+char				**ft_readdir(char *filename);
 /*
 ** Misc
 */
