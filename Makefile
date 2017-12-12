@@ -17,14 +17,15 @@ OBJS = $(SRCS:.c=.o)
 SRCS_PATH = ./srcs/
 INCS_PATH = ./includes/
 FLAGS = -Wall -Wextra -Werror -fsanitize=address
+COMPILER = gcc
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	gcc $(FLAGS) -I $(INCS_PATH) $(OBJS) -o $(NAME) libft/libft.a
+	$(COMPILER) $(FLAGS) -I $(INCS_PATH) $(OBJS) -o $(NAME) libft/libft.a
 
 %.o: $(SRCS_PATH)%.c
-	gcc $(FLAGS) -I $(INCS_PATH) -c $?
+	$(COMPILER) $(FLAGS) -I $(INCS_PATH) -c $?
 
 clean:
 	rm -f $(OBJS)
@@ -32,4 +33,4 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean re
+re: fclean all
