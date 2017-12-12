@@ -16,8 +16,8 @@ SRCS = main.c options.c
 OBJS = $(SRCS:.c=.o)
 SRCS_PATH = ./srcs/
 INCS_PATH = ./includes/
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
-COMPILER = gcc
+FLAGS = -Wall -Wextra -Werror -fsanitize=leak
+COMPILER = clang
 
 all: $(NAME)
 
