@@ -14,14 +14,15 @@
 #include "ft_ls.h"
 #include <stdio.h>
 
-static void	free_stuff(char *options, char **files)
+static void	free_stuff(char *options, t_arg *files)
 {
 	size_t	i;
 
-	free(options);
+	if (options != NULL)
+		free(options);
 	i = 0;
-	while (files[i])
-		ft_strdel(&files[i++]);
+	// while (files[i])
+	// 	ft_strdel(&files[i++]);
 	free(files);
 }
 
@@ -30,9 +31,11 @@ int			main(int argc, char **argv)
 	t_arg	*files;
 	char	*options;
 
-	options = get_options(argc, &argv[1]);
-	get_all_files(argc, argv, options, &files);
-	ft_puttab(files);
+	if ((options = get_options(argc, &argv[1])) == NULL)
+		return (-1);
+	if (get_all_files(argc, argv, options, &files) == -1)
+		return (-1);
+	// ft_puttab(files);
 	free_stuff(options, files);
 	return (0);
 }

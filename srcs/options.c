@@ -42,22 +42,29 @@ static int		add_option(char **options, char c)
 
 char			*get_options(int argc, char **argv)
 {
+	char	*pointer;
 	char	*options;
 
+	options = NULL;
 	if (argc <= 1 || (options = ft_strnew(1)) == NULL)
-		return (NULL);
+		return (options);
 	argc -= 1;
 	while (argc-- > 0)
 	{
 		if (argv[argc][0] == '-')
 		{
+			pointer = argv[argc];
 			argv[argc] += 1;
 			while (*(argv[argc]))
 			{
 				if (add_option(&options, *(argv[argc])) == -1)
+				{
+					free(options);
 					return (NULL);
+				}
 				argv[argc] += 1;
 			}
+			argv[argc] = pointer;
 		}
 	}
 	return (options);

@@ -22,7 +22,7 @@ typedef struct	s_file
 {
 	char		*path;
 	char		*filename;
-}				s_file;
+}				t_file;
 
 typedef struct	s_arg
 {
@@ -33,7 +33,7 @@ typedef struct	s_arg
 }				t_arg;
 
 char			*get_options(int argc, char **argv);
-void			get_all_files(int argc, char **argv,
+int				get_all_files(int argc, char **argv,
 			char *options, t_arg **files);
 
 #endif

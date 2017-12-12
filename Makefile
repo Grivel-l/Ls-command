@@ -12,7 +12,7 @@
 # **************************************************************************** #
 
 NAME = ft_ls
-SRCS = main.c options.c
+SRCS = main.c options.c files.c
 OBJS = $(SRCS:.c=.o)
 SRCS_PATH = ./srcs/
 INCS_PATH = ./includes/
