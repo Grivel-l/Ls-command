@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   print.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/13 19:14:51 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/12/13 18:59:58 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/12/13 19:13:22 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,29 +14,23 @@
 #include "ft_ls.h"
 #include <stdio.h>
 
-static void	free_stuff(char *options, t_arg *files)
+void	print_result(t_arg *files)
 {
 	size_t	i;
+	size_t	j;
 
-	if (options != NULL)
-		free(options);
 	i = 0;
-	// while (files[i])
-	// 	ft_strdel(&files[i++]);
-	free(files);
-}
-
-int			main(int argc, char **argv)
-{
-	t_arg	*files;
-	char	*options;
-
-	if ((options = get_options(argc, &argv[1])) == NULL)
-		return (-1);
-	if (get_all_files((size_t)argc, argv, options, &files) == -1)
-		return (-1);
-	print_result(files);
-	// ft_puttab(files);
-	free_stuff(options, files);
-	return (0);
+	dprintf(1, "\n\nPrint result\n\n");
+	while (files[i].arg_name != NULL)
+	{
+		printf("Arg name: %s\n", files[i].arg_name);
+		j = 0;
+		while (files[i].files[j].filename)
+		{
+			printf("File: %s\n", files[i].files[j].filename);
+			j += 1;
+		}
+		printf("\n");
+		i += 1;
+	}
 }

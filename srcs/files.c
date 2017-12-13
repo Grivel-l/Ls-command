@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 23:22:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/13 19:16:38 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,13 +29,72 @@ static size_t	get_args_nbr(size_t argc, char ***argv)
 	return (nbr);
 }
 
-int				get_all_files(int argc, char **argv, char *options, t_arg **files)
+static int		manage_dir(t_arg **files, size_t *index, char *filename)
+{
+	size_t	i;
+	char	**dir_files;
+
+	dir_files = ft_readdir(filename);
+	if (((*files)[*index].files = malloc(sizeof(t_file) * (ft_tablen(dir_files) + 1))) == NULL)
+		return (-1);
+	i = 0;
+	while (dir_files[i])
+	{
+		if (((*files)[*index].files[i].filename = ft_strdup(dir_files[i])) == NULL)
+		{
+			free((*files)[*index].files);
+			return (-1);
+		}
+		i += 1;
+	}
+	(*files)[*index].files[i].filename = NULL;
+	dir_files[i] = NULL;
+	return (0);
+}
+
+static int		read_dir(char *filename, t_arg **files, char *options, size_t *index)
 {
 	(void)options;
+
+	if (stat((const char *)filename, &((*files)[*index].file_info)) == -1)
+		return (-1);
+	(*files)[*index].is_file = !S_ISDIR((*files)[*index].file_info.st_mode);
+	if (((*files)[*index].arg_name = ft_strdup(filename)) == NULL)
+		return (-1);
+	if (!(*files)[*index].is_file)
+		return (manage_dir(files, index, filename));
+	return (0);
+}
+
+int				get_all_files(size_t argc, char **argv, char *options, t_arg **files)
+{
+	size_t	i;
+	size_t	*index;
 	size_t	valid_args_nbr;
 
-	valid_args_nbr = get_args_nbr((size_t)argc, &argv);
-	if ((*files = malloc(sizeof(t_arg) * (valid_args_nbr + 1))) == NULL)
+	valid_args_nbr = get_args_nbr(argc, &argv);
+	if (((index = malloc(sizeof(size_t))) == NULL) || ((*files = malloc(sizeof(t_arg) * 2)) == NULL))
 		return (-1);
+	if (valid_args_nbr == 0)
+	{
+		if (read_dir(".", files, options, 0) == -1)
+			return (-1);
+	}
+	else
+	{
+		i = 1;
+		*index = 0;
+		while (i < argc)
+		{
+			if (argv[i][0] != '-')
+			{
+				if (read_dir(argv[i], files, options, index) == -1)
+					return (-1);
+				*index += 1;
+				(*files)[*index].arg_name = NULL;
+			}
+			i += 1;
+		}
+	}
 	return (0);
 }
