@@ -6,14 +6,14 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 19:30:27 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 19:32:19 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/13 20:32:18 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_readdir(char *filename)
+char	**ft_readdir(char *filename, size_t get_hidden)
 {
 	DIR				*dir;
 	char			**all_dirs;
@@ -26,7 +26,10 @@ char	**ft_readdir(char *filename)
 		return (NULL);
 	dir_content = readdir(dir);
 	while ((dir_content = readdir(dir)) != NULL)
-		ft_pushstr(&all_dirs, dir_content->d_name);
+	{
+		if ((get_hidden) || (!get_hidden && dir_content->d_name[0] != '.'))
+			ft_pushstr(&all_dirs, dir_content->d_name);
+	}
 	if (closedir(dir) == -1)
 		return (NULL);
 	return (all_dirs);

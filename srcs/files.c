@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/13 19:16:38 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/13 21:07:35 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,12 +29,12 @@ static size_t	get_args_nbr(size_t argc, char ***argv)
 	return (nbr);
 }
 
-static int		manage_dir(t_arg **files, size_t *index, char *filename)
+static int		manage_dir(t_arg **files, size_t *index, char *filename, char *options)
 {
 	size_t	i;
 	char	**dir_files;
 
-	dir_files = ft_readdir(filename);
+	dir_files = ft_readdir(filename, ft_strchr(options, 'a') != NULL);
 	if (((*files)[*index].files = malloc(sizeof(t_file) * (ft_tablen(dir_files) + 1))) == NULL)
 		return (-1);
 	i = 0;
@@ -45,24 +45,26 @@ static int		manage_dir(t_arg **files, size_t *index, char *filename)
 			free((*files)[*index].files);
 			return (-1);
 		}
+		if (ft_strchr(options, 'l') != NULL)
+			if (stat(ft_strjoin(filename, (const char *)dir_files[i]), &((*files)[*index].files[i].file_info)) == -1)
+				return (-1);
 		i += 1;
 	}
 	(*files)[*index].files[i].filename = NULL;
 	dir_files[i] = NULL;
+	free(filename);
 	return (0);
 }
 
 static int		read_dir(char *filename, t_arg **files, char *options, size_t *index)
 {
-	(void)options;
-
 	if (stat((const char *)filename, &((*files)[*index].file_info)) == -1)
 		return (-1);
 	(*files)[*index].is_file = !S_ISDIR((*files)[*index].file_info.st_mode);
 	if (((*files)[*index].arg_name = ft_strdup(filename)) == NULL)
 		return (-1);
 	if (!(*files)[*index].is_file)
-		return (manage_dir(files, index, filename));
+		return (manage_dir(files, index, ft_strjoin(filename, "/"), options));
 	return (0);
 }
 

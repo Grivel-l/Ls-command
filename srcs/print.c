@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/13 18:59:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/13 19:13:22 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/13 21:08:09 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,6 @@ void	print_result(t_arg *files)
 	size_t	j;
 
 	i = 0;
-	dprintf(1, "\n\nPrint result\n\n");
 	while (files[i].arg_name != NULL)
 	{
 		printf("Arg name: %s\n", files[i].arg_name);

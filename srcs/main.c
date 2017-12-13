@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/13 19:14:51 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/13 21:07:59 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,7 +34,10 @@ int			main(int argc, char **argv)
 	if ((options = get_options(argc, &argv[1])) == NULL)
 		return (-1);
 	if (get_all_files((size_t)argc, argv, options, &files) == -1)
+	{
+		printf("Error\n");
 		return (-1);
+	}
 	print_result(files);
 	// ft_puttab(files);
 	free_stuff(options, files);
