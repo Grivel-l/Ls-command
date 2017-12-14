@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/14 16:27:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/14 17:37:29 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,6 +40,7 @@ static int		manage_dir(t_arg **files, size_t *index, char *filename, char *optio
 	i = 0;
 	while (dir_files[i])
 	{
+		(*files)[*index].files[i].path = NULL;
 		if (((*files)[*index].files[i].filename = ft_strdup(dir_files[i])) == NULL)
 		{
 			free((*files)[*index].files);
@@ -58,6 +59,9 @@ static int		manage_dir(t_arg **files, size_t *index, char *filename, char *optio
 
 static int		read_dir(char *filename, t_arg **files, char *options, size_t *index)
 {
+	if (*index > 0)
+		if (realloc_files(files, *index) == -1)
+			return (-1);
 	if (stat((const char *)filename, &((*files)[*index].file_info)) == -1)
 		return (-1);
 	(*files)[*index].is_file = !S_ISDIR((*files)[*index].file_info.st_mode);
