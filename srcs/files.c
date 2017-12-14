@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/13 22:33:11 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/14 16:27:23 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,15 +77,16 @@ int				get_all_files(size_t argc, char **argv, char *options, t_arg **files)
 	valid_args_nbr = get_args_nbr(argc, &argv);
 	if (((index = malloc(sizeof(size_t))) == NULL) || ((*files = malloc(sizeof(t_arg) * 2)) == NULL))
 		return (-1);
+	*index = 0;
 	if (valid_args_nbr == 0)
 	{
-		if (read_dir(".", files, options, 0) == -1)
+		if (read_dir(".", files, options, index) == -1)
 			return (-1);
+		(*files)[1].arg_name = NULL;
 	}
 	else
 	{
 		i = 1;
-		*index = 0;
 		while (i < argc)
 		{
 			if (argv[i][0] != '-')

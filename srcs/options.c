@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/11 23:23:47 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/14 16:25:52 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,7 +46,7 @@ char			*get_options(int argc, char **argv)
 	char	*options;
 
 	options = NULL;
-	if (argc <= 1 || (options = ft_strnew(1)) == NULL)
+	if ((options = ft_strnew(1)) == NULL || argc <= 1)
 		return (options);
 	argc -= 1;
 	while (argc-- > 0)
