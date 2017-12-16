@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/13 18:59:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/16 22:22:56 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/17 00:54:25 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ static void	print_files(t_file *files)
 	ft_putchar('\n');
 }
 
-void	print_result(t_arg *args, size_t argc, char **argv)
+void		print_result(t_arg *args, size_t argc, char **argv)
 {
 	size_t	i;
 	size_t	valid_args;
