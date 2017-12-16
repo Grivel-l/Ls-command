@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/14 17:37:29 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/16 17:55:32 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,9 +46,8 @@ static int		manage_dir(t_arg **files, size_t *index, char *filename, char *optio
 			free((*files)[*index].files);
 			return (-1);
 		}
-		if (ft_strchr(options, 'l') != NULL)
-			if (stat(ft_strjoin(filename, (const char *)dir_files[i]), &((*files)[*index].files[i].file_info)) == -1)
-				return (-1);
+		if (stat(ft_strjoin(filename, (const char *)dir_files[i]), &((*files)[*index].files[i].file_info)) == -1)
+			return (-1);
 		i += 1;
 	}
 	(*files)[*index].files[i].filename = NULL;
@@ -57,7 +56,7 @@ static int		manage_dir(t_arg **files, size_t *index, char *filename, char *optio
 	return (0);
 }
 
-static int		read_dir(char *filename, t_arg **files, char *options, size_t *index)
+int				read_dir(char *filename, t_arg **files, char *options, size_t *index)
 {
 	if (*index > 0)
 		if (realloc_files(files, *index) == -1)
@@ -103,5 +102,7 @@ int				get_all_files(size_t argc, char **argv, char *options, t_arg **files)
 			i += 1;
 		}
 	}
+	if (ft_strchr(options, 'R') != NULL)
+		return (launch_recursive(files, options));
 	return (0);
 }
