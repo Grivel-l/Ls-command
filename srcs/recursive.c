@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/16 15:48:31 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/16 20:18:34 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/16 21:02:54 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,7 +58,7 @@ static int		read_files(size_t arg_i, t_arg **args, char *options)
 		{
 			if (add_path((*args)[arg_i], i, &pointer, &filename) == -1)
 				return (-1);
-			if (read_dir(filename, args, options, &index) == -1)
+			if (read_dir(filename, args, options, index) == -1)
 			{
 				free(pointer);
 				return (-1);
