@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/16 15:48:31 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/16 18:23:43 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/16 18:55:29 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,9 @@ static int		read_files(size_t arg_i, t_arg **args, char *options)
 	index = argslen(args);
 	while ((*args)[arg_i].files[i].filename != NULL)
 	{
-		if (S_ISDIR((*args)[arg_i].files[i].file_info.st_mode))
+		if ((S_ISDIR((*args)[arg_i].files[i].file_info.st_mode)) &&
+				(ft_strcmp((*args)[arg_i].files[i].filename, ".") != 0) &&
+				(ft_strcmp((*args)[arg_i].files[i].filename, "..") != 0))
 		{
 			if ((filename = ft_strjoin((*args)[arg_i].arg_name, "/")) == NULL)
 				return (-1);
