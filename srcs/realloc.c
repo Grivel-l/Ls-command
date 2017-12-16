@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/14 16:38:16 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/14 17:43:03 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/16 20:21:22 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,13 +27,11 @@ static size_t	get_files_length(t_file *files)
 static t_file	*filesdup(t_file *files)
 {
 	t_file	*new_files;
-	t_file	*files_pointer;
 	t_file	*new_files_pointer;
 
 	if ((new_files = malloc(sizeof(t_file) *
 					(get_files_length(files) + 1))) == NULL)
 		return (NULL);
-	files_pointer = files;
 	new_files_pointer = new_files;
 	while (files->filename != NULL)
 	{
@@ -46,13 +44,10 @@ static t_file	*filesdup(t_file *files)
 				return (NULL);
 			free(files->path);
 		}
-		new_files->file_info = files->file_info;
-		free(files->filename);
-		files += 1;
-		new_files += 1;
+		new_files++->file_info = files->file_info;
+		free(files++->filename);
 	}
 	new_files->filename = NULL;
-	files = files_pointer;
 	return (new_files_pointer);
 }
 

@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/16 15:48:31 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/16 18:55:29 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/16 20:18:34 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,25 @@ static size_t	argslen(t_arg **files)
 	return (i);
 }
 
+static int		is_valid_dir(t_arg **args, size_t arg_i, size_t i)
+{
+	return ((S_ISDIR((*args)[arg_i].files[i].file_info.st_mode)) &&
+				(ft_strcmp((*args)[arg_i].files[i].filename, ".") != 0) &&
+				(ft_strcmp((*args)[arg_i].files[i].filename, "..") != 0));
+}
+
+static int		add_path(t_arg arg, size_t i, char **pointer, char **filename)
+{
+	if ((*filename = ft_strjoin(arg.arg_name,
+					"/")) == NULL)
+		return (-1);
+	*pointer = *filename;
+	if ((*filename = ft_strjoin(*filename,
+					arg.files[i].filename)) == NULL)
+		return (-1);
+	return (0);
+}
+
 static int		read_files(size_t arg_i, t_arg **args, char *options)
 {
 	size_t	i;
@@ -35,14 +54,9 @@ static int		read_files(size_t arg_i, t_arg **args, char *options)
 	index = argslen(args);
 	while ((*args)[arg_i].files[i].filename != NULL)
 	{
-		if ((S_ISDIR((*args)[arg_i].files[i].file_info.st_mode)) &&
-				(ft_strcmp((*args)[arg_i].files[i].filename, ".") != 0) &&
-				(ft_strcmp((*args)[arg_i].files[i].filename, "..") != 0))
+		if (is_valid_dir(args, arg_i, i))
 		{
-			if ((filename = ft_strjoin((*args)[arg_i].arg_name, "/")) == NULL)
-				return (-1);
-			pointer = filename;
-			if ((filename = ft_strjoin(filename, (*args)[arg_i].files[i].filename)) == NULL)
+			if (add_path((*args)[arg_i], i, &pointer, &filename) == -1)
 				return (-1);
 			if (read_dir(filename, args, options, &index) == -1)
 			{
