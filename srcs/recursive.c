@@ -6,13 +6,12 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/16 15:48:31 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/16 21:02:54 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/16 21:24:23 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
 static size_t	argslen(t_arg **files)
 {

@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/16 20:43:56 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/16 21:43:03 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,8 @@ typedef struct	s_arg
 }				t_arg;
 
 char			*get_options(int argc, char **argv);
-void			print_result(t_arg *files);
+void			print_result(t_arg *files, size_t argc, char **argv);
+size_t			get_valid_args_nbr(size_t argc, char ***argv);
 int             launch_recursive(t_arg **files, char *options);
 int				realloc_files(t_arg **files, size_t index);
 int				read_dir(char *filename, t_arg **files,

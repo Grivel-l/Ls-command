@@ -6,15 +6,14 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/16 21:07:39 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/16 21:38:10 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
-static size_t	get_args_nbr(size_t argc, char ***argv)
+size_t			get_valid_args_nbr(size_t argc, char ***argv)
 {
 	size_t	i;
 	size_t	nbr;
@@ -102,7 +101,7 @@ int				get_all_files(size_t argc, char **argv,
 {
 	size_t	valid_args_nbr;
 
-	valid_args_nbr = get_args_nbr(argc, &argv);
+	valid_args_nbr = get_valid_args_nbr(argc, &argv);
 	if (((*files = malloc(sizeof(t_arg) * 2)) == NULL))
 		return (-1);
 	if (valid_args_nbr == 0)

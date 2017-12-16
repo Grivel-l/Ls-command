@@ -6,13 +6,12 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/14 16:38:16 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/16 20:52:59 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/16 21:24:47 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
 static size_t	get_files_length(t_file *files)
 {
@@ -70,10 +69,8 @@ int				realloc_files(t_arg **args, size_t index)
 	t_arg	*args_pointer;
 	t_arg	*new_args_pointer;
 
-	dprintf(1, "HelloWorld index: %zu\n", index);
 	if ((new_args = malloc(sizeof(t_arg) * (2 + index))) == NULL)
 		return (-1);
-	dprintf(1, "HelloWorld\n");
 	args_pointer = *args;
 	new_args_pointer = new_args;
 	while ((**args).arg_name != NULL)

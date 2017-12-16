@@ -6,30 +6,50 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/13 18:59:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/13 21:08:09 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/16 22:22:56 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
-void	print_result(t_arg *files)
+static void	print_files(t_file *files)
 {
 	size_t	i;
-	size_t	j;
 
 	i = 0;
-	while (files[i].arg_name != NULL)
+	while (files[i].filename)
 	{
-		printf("Arg name: %s\n", files[i].arg_name);
-		j = 0;
-		while (files[i].files[j].filename)
+		if (i > 0)
+			ft_putstr("     ");
+		ft_putstr(files[i].filename);
+		i += 1;
+	}
+	ft_putchar('\n');
+}
+
+void	print_result(t_arg *args, size_t argc, char **argv)
+{
+	size_t	i;
+	size_t	valid_args;
+
+	i = 0;
+	valid_args = get_valid_args_nbr(argc, &argv);
+	while (args[i].arg_name != NULL)
+	{
+		if (i == 0 && args[i + 1].arg_name == NULL)
+			print_files(args[i].files);
+		else
 		{
-			printf("File: %s\n", files[i].files[j].filename);
-			j += 1;
+			if (i != 0)
+				ft_putchar('\n');
+			if ((valid_args > 1) || (valid_args <= 1 && i != 0))
+			{
+				ft_putstr(args[i].arg_name);
+				ft_putstr(":\n");
+			}
+			print_files(args[i].files);
 		}
-		printf("\n");
 		i += 1;
 	}
 }
