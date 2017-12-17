@@ -32,9 +32,11 @@ static int		manage_dir(t_arg **files, size_t index,
 		char *filename, char *options)
 {
 	size_t	i;
+	char	*path;
 	char	**dir_files;
 
-	dir_files = ft_readdir(filename, ft_strchr(options, 'a') != NULL);
+	if ((dir_files = ft_readdir(filename, ft_strchr(options, 'a') != NULL)) == NULL)
+		return (-1);
 	if (((*files)[index].files =
 				malloc(sizeof(t_file) * (ft_tablen(dir_files) + 1))) == NULL)
 		return (-1);
@@ -42,19 +44,15 @@ static int		manage_dir(t_arg **files, size_t index,
 	while (dir_files[i])
 	{
 		(*files)[index].files[i].path = NULL;
-		if (((*files)[index].files[i].filename =
-					ft_strdup(dir_files[i])) == NULL)
-		{
-			free((*files)[index].files);
-			return (-1);
-		}
-		if (stat(ft_strjoin(filename, (const char *)dir_files[i]),
-					&((*files)[index].files[i].file_info)) == -1)
+		if ((((*files)[index].files[i].filename =
+					ft_strdup(dir_files[i])) == NULL) ||
+			((path = ft_strjoin(filename, (const char*)dir_files[i])) == NULL) ||
+			stat(path, &((*files)[index].files[i].file_info)) == -1)
 			return (-1);
 		i += 1;
 	}
 	(*files)[index].files[i].filename = NULL;
-	free(filename);
+	free_dir_files(filename, dir_files, path);
 	return (0);
 }
 

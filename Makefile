@@ -12,11 +12,11 @@
 # **************************************************************************** #
 
 NAME = ft_ls
-SRCS = main.c options.c files.c print.c realloc.c recursive.c
+SRCS = main.c options.c files.c print.c realloc.c recursive.c free_allocs.c
 OBJS = $(SRCS:.c=.o)
 SRCS_PATH = ./srcs/
 INCS_PATH = ./includes/
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 COMPILER = clang
 
 all: $(NAME)

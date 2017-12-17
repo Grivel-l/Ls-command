@@ -37,6 +37,8 @@ static int		add_option(char **options, char c)
 		option_error();
 		return (-1);
 	}
+	if (*options == NULL)
+		return (-1);
 	return (0);
 }
 
@@ -57,10 +59,7 @@ char			*get_options(int argc, char **argv)
 			while (*(argv[argc]))
 			{
 				if (add_option(&options, *(argv[argc])) == -1)
-				{
-					free(options);
 					return (NULL);
-				}
 				argv[argc] += 1;
 			}
 			argv[argc] = pointer;

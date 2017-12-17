@@ -35,6 +35,7 @@ typedef struct	s_arg
 }				t_arg;
 
 char			*get_options(int argc, char **argv);
+void 			free_dir_files(char *filename, char **dir_files, char *path);
 void			print_result(t_arg *files, size_t argc, char **argv);
 size_t			get_valid_args_nbr(size_t argc, char ***argv);
 int             launch_recursive(t_arg **files, char *options);
