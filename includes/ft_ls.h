@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/16 21:43:03 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/19 19:42:08 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@
 # include <dirent.h>
 # include <stdlib.h>
 # include <sys/stat.h>
+# include <time.h>
 # include "../libft/libft.h"
 
 typedef struct	s_file
@@ -36,7 +37,8 @@ typedef struct	s_arg
 
 char			*get_options(int argc, char **argv);
 void 			free_dir_files(char *filename, char **dir_files, char *path);
-void			print_result(t_arg *files, size_t argc, char **argv);
+void			print_result(t_arg *files, size_t valid_args);
+void			sort_all(t_arg **args, char *options, size_t valid_args);
 size_t			get_valid_args_nbr(size_t argc, char ***argv);
 int             launch_recursive(t_arg **files, char *options);
 int				realloc_files(t_arg **files, size_t index);

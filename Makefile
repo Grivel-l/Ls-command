@@ -6,17 +6,18 @@
 #    By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/12/11 16:25:45 by legrivel     #+#   ##    ##    #+#        #
-#    Updated: 2017/12/16 15:48:24 by legrivel    ###    #+. /#+    ###.fr      #
+#    Updated: 2017/12/19 16:31:38 by legrivel    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
 NAME = ft_ls
-SRCS = main.c options.c files.c print.c realloc.c recursive.c free_allocs.c
+SRCS = main.c options.c files.c print.c realloc.c recursive.c free_allocs.c \
+	sort.c
 OBJS = $(SRCS:.c=.o)
 SRCS_PATH = ./srcs/
 INCS_PATH = ./includes/
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 COMPILER = clang
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/16 21:38:58 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/19 19:14:36 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,18 +47,21 @@ static void	free_args(char *options, t_arg *args)
 
 int			main(int argc, char **argv)
 {
-	t_arg	*files;
+	t_arg	*args;
 	char	*options;
+	size_t	valid_args;
 
 	if ((options = get_options(argc, &argv[1])) == NULL)
 		return (-1);
-	if (get_all_files((size_t)argc, argv, options, &files) == -1)
+	if (get_all_files((size_t)argc, argv, options, &args) == -1)
 	{
 		printf("Error\n");
 		return (-1);
 	}
-	print_result(files, (size_t)argc, argv);
+	valid_args = get_valid_args_nbr(argc, &argv);
+	sort_all(&args, options, valid_args);
+	print_result(args, valid_args);
 	// ft_puttab(files);
-	free_args(options, files);
+	free_args(options, args);
 	return (0);
 }
