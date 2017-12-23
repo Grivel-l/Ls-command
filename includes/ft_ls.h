@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/23 02:53:20 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/23 23:31:25 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,40 +20,13 @@
 # include <time.h>
 # include "../libft/libft.h"
 
-typedef struct	s_file
+typedef struct		s_file
 {
-	char		*path;
-	char		*filename;
-	struct stat	file_info;
-}				t_file;
-
-typedef struct	s_arg
-{
-	t_file		*files;
-	size_t		is_file;
-	char		*arg_name;
-	struct s_arg	*sub_dir;
+	size_t			is_arg;
+	size_t			is_file;
+	char			*filename;
 	struct stat		file_info;
-}				t_arg;
-
-typedef struct	s_info
-{
-	char		*name;
-	struct stat	stats;
-}				t_info;
-
-char			*get_options(int argc, char **argv);
-void 			free_dir_files(char *filename, char **dir_files, char *path);
-void			print_result(t_arg *files, size_t valid_args);
-void			sort_all(t_arg **args, char *options, size_t valid_args);
-size_t			get_valid_args_nbr(size_t argc, char ***argv);
-int             launch_recursive(t_arg **files, char *options);
-int				realloc_files(t_arg **files, size_t index);
-int				fill_infos(char **files, t_info **files_infos, char *filename);
-size_t			count_dirs(t_info *files_info);
-int				read_dir(char *filename, t_arg **files,
-			char *options, size_t index);
-int				get_all_files(size_t argc, char **argv,
-			char *options, t_arg **files);
+	struct s_list	*file_list;
+}					t_file;
 
 #endif
