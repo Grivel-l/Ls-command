@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:32:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/19 19:14:36 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/23 00:47:52 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,7 +59,7 @@ int			main(int argc, char **argv)
 		return (-1);
 	}
 	valid_args = get_valid_args_nbr(argc, &argv);
-	sort_all(&args, options, valid_args);
+	// sort_all(&args, options, valid_args);
 	print_result(args, valid_args);
 	// ft_puttab(files);
 	free_args(options, args);
