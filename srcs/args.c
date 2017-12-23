@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 00:50:28 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/24 00:55:59 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,35 +70,31 @@ char			*get_options(int argc, char **argv)
 	return (options);
 }
 
-t_flist		*get_args_list(int argc, char **argv)
+t_flist			*get_args_list(int argc, char **argv)
 {
 	int		i;
-	t_file	file;
 	t_flist	*list;
 	t_flist	*pointer;
 
 	i = 0;
-	list = NULL;
 	pointer = NULL;
 	while (i < argc - 1)
 	{
-		if (argv[i][0] != '-')
+		if (argv[i++][0] != '-')
 		{
-			file.is_arg = 1;
-			file.filename = ft_strdup(argv[i]);
-			if (list == NULL)
+			if (pointer == NULL)
 			{
-				if ((list = new_flist(new_file(argv[i], 1))) == NULL)
+				if ((list = new_flist(new_file(argv[i - 1], 1))) == NULL)
 					return (NULL);
 				pointer = list;
 			}
 			else
-				if ((list->next = new_flist(new_file(argv[i], 1))) == NULL)
+			{
+				if ((list->next = new_flist(new_file(argv[i - 1], 1))) == NULL)
 					return (NULL);
-			if (list->next != NULL)
 				list = list->next;
+			}
 		}
-		i += 1;
 	}
 	return (pointer == NULL ? new_flist(new_file(NULL, 0)) : pointer);
 }
