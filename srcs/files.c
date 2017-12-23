@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   files.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/23 23:34:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 00:51:18 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/12/23 23:51:52 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/12/24 00:49:11 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int argc, char **argv)
+t_file		*new_file(char *filename, size_t is_arg)
 {
-	t_flist	*list;
-	char	*options;
+	t_file	*file;
 
-	if ((options = get_options(argc, &(argv[1]))) == NULL)
-		return (-1);
-	if ((list = get_args_list(argc, &(argv[1]))) == NULL)
-		return (-1);
-	free(options);
-	return (0);
+	if ((file = malloc(sizeof(t_file))) == NULL)
+		return (NULL);
+	file->is_arg = is_arg;
+	if (filename == NULL)
+	{
+		file->filename = NULL;
+		return (file);
+	}
+	if ((file->filename = ft_strdup(filename)) == NULL)
+		return (NULL);
+	return (file);
 }

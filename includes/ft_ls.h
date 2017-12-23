@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/23 23:41:20 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/24 00:50:10 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,6 +30,17 @@ typedef struct		s_file
 	struct s_list	*file_list;
 }					t_file;
 
+typedef struct		s_flist
+{
+	t_file			*file;
+	struct s_flist	*next;
+}					t_flist;
+
 char				*get_options(int argc, char **argv);
+t_flist				*get_args_list(int argc, char **argv);
+
+t_file				*new_file(char *filename, size_t is_arg);
+
+t_flist				*new_flist(t_file *file);
 
 #endif

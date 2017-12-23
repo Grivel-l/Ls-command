@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   list.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/23 23:34:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 00:51:18 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/12/24 00:48:34 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/12/24 00:48:56 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int argc, char **argv)
+t_flist		*new_flist(t_file *file)
 {
 	t_flist	*list;
-	char	*options;
 
-	if ((options = get_options(argc, &(argv[1]))) == NULL)
-		return (-1);
-	if ((list = get_args_list(argc, &(argv[1]))) == NULL)
-		return (-1);
-	free(options);
-	return (0);
+	if (file == NULL)
+		return (NULL);
+	if ((list = malloc(sizeof(t_flist))) == NULL)
+		return (NULL);
+	list->file = file;
+	list->next = NULL;
+	return (list);
 }
