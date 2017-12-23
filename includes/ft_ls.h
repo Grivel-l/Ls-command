@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/23 23:31:25 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/23 23:41:20 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <time.h>
+# include <stdio.h>
 # include "../libft/libft.h"
 
 typedef struct		s_file
@@ -28,5 +29,7 @@ typedef struct		s_file
 	struct stat		file_info;
 	struct s_list	*file_list;
 }					t_file;
+
+char				*get_options(int argc, char **argv);
 
 #endif

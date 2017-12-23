@@ -6,13 +6,13 @@
 #    By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/12/11 16:25:45 by legrivel     #+#   ##    ##    #+#        #
-#    Updated: 2017/12/23 23:32:25 by legrivel    ###    #+. /#+    ###.fr      #
+#    Updated: 2017/12/23 23:39:04 by legrivel    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
 NAME = ft_ls
-SRCS = main.c
+SRCS = main.c options.c
 OBJS = $(SRCS:.c=.o)
 SRCS_PATH = ./srcs/
 INCS_PATH = ./includes/
