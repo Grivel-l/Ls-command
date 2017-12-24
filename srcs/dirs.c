@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 02:31:22 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/24 02:45:29 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,10 +27,37 @@ static int	fill_infos(t_file *file, char *path)
 	return (0);
 }
 
+static int	fill_file(char *files, t_flist **list,
+		char *path, t_flist **list_start)
+{
+	char	*file_path;
+
+	if ((file_path = ft_strjoin(path, "/")) == NULL)
+		return (-1);
+	if ((file_path = ft_strrealloc(file_path, files)) == NULL)
+		return (-1);
+	if (*list_start == NULL)
+	{
+		if ((*list = new_flist(new_file(file_path, 0))) == NULL)
+			return (-1);
+		*list_start = *list;
+	}
+	else
+	{
+		if (((*list)->next = new_flist(new_file(file_path, 0))) == NULL)
+			return (-1);
+		*list = (*list)->next;
+	}
+	if (fill_infos((*list)->file, file_path) == -1)
+		return (-1);
+	ft_strdel(&file_path);
+	ft_strdel(&files);
+	return (0);
+}
+
 static int	get_files(t_flist **list, char *path, char *options)
 {
 	char	**files;
-	char	*file_path;
 	t_flist	*list_start;
 	char	*files_start;
 
@@ -40,24 +67,8 @@ static int	get_files(t_flist **list, char *path, char *options)
 	files_start = *files;
 	while (*files != NULL)
 	{
-		if ((file_path = ft_strjoin(path, "/")) == NULL)
+		if (fill_file(*files, list, path, &list_start) == -1)
 			return (-1);
-		if ((file_path = ft_strrealloc(file_path, *files)) == NULL)
-			return (-1);
-		if (list_start == NULL)
-		{
-			if ((*list = new_flist(new_file(file_path, 0))) == NULL)
-				return (-1);
-			list_start = *list;
-		}
-		else
-		{
-			if (((*list)->next = new_flist(new_file(file_path, 0))) == NULL)
-				return (-1);
-			*list = (*list)->next;
-		}
-		ft_strdel(&file_path);
-		ft_strdel(&(*files));
 		files += 1;
 	}
 	*list = list_start;
@@ -79,8 +90,9 @@ int			read_dir(t_flist **list, char *path, char *options)
 			ft_strdel(&file_path);
 			return (-1);
 		}
-		if (((*list)->file->is_arg) || (ft_strchr(options, 'R')))
-			if (get_files(&((*list)->file->file_list), file_path, options) == -1)
+		if ((*list)->file->is_arg)
+			if (get_files(&((*list)->file->file_list),
+						file_path, options) == -1)
 				return (-1);
 		ft_strdel(&file_path);
 		*list = (*list)->next;
