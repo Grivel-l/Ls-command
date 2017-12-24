@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 02:45:29 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/24 03:09:05 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,6 +69,11 @@ static int	get_files(t_flist **list, char *path, char *options)
 	{
 		if (fill_file(*files, list, path, &list_start) == -1)
 			return (-1);
+		if (S_ISDIR((*list)->file->file_info.st_mode) &&
+				ft_strchr(options, 'R') != NULL)
+			if (get_files(&((*list)->file->file_list),
+						(*list)->file->filename, options) == -1)
+				return (-1);
 		files += 1;
 	}
 	*list = list_start;
