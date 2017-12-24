@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 00:50:10 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/24 01:05:12 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,4 +43,5 @@ t_file				*new_file(char *filename, size_t is_arg);
 
 t_flist				*new_flist(t_file *file);
 
+void				free_args(t_flist *list);
 #endif

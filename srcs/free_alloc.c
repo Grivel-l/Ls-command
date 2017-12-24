@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   free_alloc.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/23 23:34:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 01:05:31 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/12/24 01:04:19 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2017/12/24 01:09:03 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int argc, char **argv)
+void	free_args(t_flist *list)
 {
-	t_flist	*list;
-	char	*options;
+	t_flist	*next;
 
-	if ((options = get_options(argc, &(argv[1]))) == NULL)
-		return (-1);
-	if ((list = get_args_list(argc, &(argv[1]))) == NULL)
-		return (-1);
-	free_args(list);
-	free(options);
-	return (0);
+	if (list != NULL)
+	{
+		next = list->next;
+		free(list->file->filename);
+		free(list->file);
+		free(list);
+		free_args(next);
+	}
 }
