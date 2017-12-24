@@ -51,7 +51,6 @@ static int	fill_file(char *files, t_flist **list,
 	if (fill_infos((*list)->file, file_path) == -1)
 		return (-1);
 	ft_strdel(&file_path);
-	ft_strdel(&files);
 	return (0);
 }
 
@@ -69,11 +68,14 @@ static int	get_files(t_flist **list, char *path, char *options)
 	{
 		if (fill_file(*files, list, path, &list_start) == -1)
 			return (-1);
-		if (S_ISDIR((*list)->file->file_info.st_mode) &&
-				ft_strchr(options, 'R') != NULL)
+		if (ft_strchr(options, 'R') != NULL &&
+			S_ISDIR((*list)->file->file_info.st_mode) &&
+ 			ft_strcmp(*files, ".") != 0 &&
+			ft_strcmp(*files, "..") != 0)
 			if (get_files(&((*list)->file->file_list),
 						(*list)->file->filename, options) == -1)
 				return (-1);
+		ft_strdel(&(*files));
 		files += 1;
 	}
 	*list = list_start;
