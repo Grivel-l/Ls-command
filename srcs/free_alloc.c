@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:04:19 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 01:09:03 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/24 01:15:41 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ void	free_args(t_flist *list)
 	if (list != NULL)
 	{
 		next = list->next;
-		free(list->file->filename);
+		ft_strdel(&(list->file->filename));
 		free(list->file);
 		free(list);
 		free_args(next);
