@@ -21,6 +21,7 @@ void	free_args(t_flist *list)
 	{
 		next = list->next;
 		ft_strdel(&(list->file->filename));
+		free(list->file->file_list);
 		free(list->file);
 		free(list);
 		free_args(next);

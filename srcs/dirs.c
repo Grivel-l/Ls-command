@@ -58,12 +58,12 @@ static int	get_files(t_flist **list, char *path, char *options)
 {
 	char	**files;
 	t_flist	*list_start;
-	char	*files_start;
+	char	**files_start;
 
 	if ((files = ft_readdir(path, ft_strchr(options, 'a') != NULL)) == NULL)
 		return (-1);
 	list_start = NULL;
-	files_start = *files;
+	files_start = files;
 	while (*files != NULL)
 	{
 		if (fill_file(*files, list, path, &list_start) == -1)
@@ -78,6 +78,7 @@ static int	get_files(t_flist **list, char *path, char *options)
 		ft_strdel(&(*files));
 		files += 1;
 	}
+	free(files_start);
 	*list = list_start;
 	return (0);
 }
