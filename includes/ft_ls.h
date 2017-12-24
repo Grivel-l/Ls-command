@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 01:22:55 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/24 02:00:05 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,11 +18,13 @@
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <time.h>
+# include <errno.h>
 # include <stdio.h>
 # include "../libft/libft.h"
 
 typedef struct		s_file
 {
+	size_t			exist;
 	size_t			is_arg;
 	size_t			is_file;
 	char			*filename;
@@ -46,4 +48,6 @@ t_flist				*new_flist(t_file *file);
 void				free_args(t_flist *list);
 
 void				print_result(t_flist *list);
+
+int					read_dir(t_flist **list, char *path);
 #endif
