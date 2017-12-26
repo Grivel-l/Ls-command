@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:34:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/26 21:01:07 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/26 22:40:03 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,8 +24,8 @@ int		main(int argc, char **argv)
 		return (-1);
 	if (read_dir(&list, "", options) == -1)
 		return (-1);
-	print_result(list);
-	free_args(list);
+	// print_result(list);
+	// free_args(list);
 	free(options);
 	return (0);
 }
