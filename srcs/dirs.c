@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 03:09:05 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/26 21:07:13 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,14 +27,14 @@ static int	fill_infos(t_file *file, char *path)
 	return (0);
 }
 
-static int	fill_file(char *files, t_flist **list,
+static int	fill_file(t_list *files, t_flist **list,
 		char *path, t_flist **list_start)
 {
 	char	*file_path;
 
 	if ((file_path = ft_strjoin(path, "/")) == NULL)
 		return (-1);
-	if ((file_path = ft_strrealloc(file_path, files)) == NULL)
+	if ((file_path = ft_strrealloc(file_path, files->content)) == NULL)
 		return (-1);
 	if (*list_start == NULL)
 	{
@@ -56,29 +56,29 @@ static int	fill_file(char *files, t_flist **list,
 
 static int	get_files(t_flist **list, char *path, char *options)
 {
-	char	**files;
+	t_list	*files;
 	t_flist	*list_start;
-	char	**files_start;
+	t_list	*previous_file;
 
 	if ((files = ft_readdir(path, ft_strchr(options, 'a') != NULL)) == NULL)
 		return (-1);
 	list_start = NULL;
-	files_start = files;
-	while (*files != NULL)
+	while (files != NULL && files->content_size > 0)
 	{
-		if (fill_file(*files, list, path, &list_start) == -1)
+		if (fill_file(files, list, path, &list_start) == -1)
 			return (-1);
 		if (ft_strchr(options, 'R') != NULL &&
 			S_ISDIR((*list)->file->file_info.st_mode) &&
- 			ft_strcmp(*files, ".") != 0 &&
-			ft_strcmp(*files, "..") != 0)
+			ft_strcmp(files->content, ".") != 0 &&
+			ft_strcmp(files->content, "..") != 0)
 			if (get_files(&((*list)->file->file_list),
 						(*list)->file->filename, options) == -1)
 				return (-1);
-		ft_strdel(&(*files));
-		files += 1;
+		previous_file = files;
+		files = files->next;
+		free(previous_file->content);
+		free(previous_file);
 	}
-	free(files_start);
 	*list = list_start;
 	return (0);
 }
