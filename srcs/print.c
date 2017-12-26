@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/27 00:15:16 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/27 00:41:32 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,7 +40,7 @@ void	sort_print(t_flist **list_start, char *options)
 	t_flist	*list;
 
 	list = *list_start;
-	if (list != NULL)
+	if (*list_start != NULL)
 	{
 		ft_putstr(list->file->path);
 		ft_putchar('\n');

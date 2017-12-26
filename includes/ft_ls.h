@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/26 22:49:17 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/27 00:41:21 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,7 +49,7 @@ t_flist				*new_flist(t_file *file);
 void				free_args(t_flist *list);
 
 void				print_result(t_flist *list);
-void    			sort_print(t_flist *list, char *options);
+void    			sort_print(t_flist **list_start, char *options);
 
 int					read_dir(t_flist **list, char *path, char *options);
 int 				get_files(t_flist **list, char *path, char *options);
