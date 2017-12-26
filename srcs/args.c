@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 00:55:59 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/26 18:18:13 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -96,5 +96,5 @@ t_flist			*get_args_list(int argc, char **argv)
 			}
 		}
 	}
-	return (pointer == NULL ? new_flist(new_file(NULL, 0)) : pointer);
+	return (pointer == NULL ? new_flist(new_file(".", 1)) : pointer);
 }
