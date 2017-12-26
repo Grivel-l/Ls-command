@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 19:15:23 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/13 20:32:34 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/26 20:18:01 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -139,7 +139,8 @@ char				*ft_strrealloc(char *str, char *to_append);
 /*
 ** Misc
 */
-char				**ft_readdir(char *filename, size_t hidden);
+t_list				*ft_readdir(char *filename, size_t hidden);
+void				ft_lstappend(t_list **list, t_list *new);
 /*
 ** Misc
 */
