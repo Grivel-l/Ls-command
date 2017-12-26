@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/26 22:49:27 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2017/12/26 23:28:09 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 static int	fill_infos(t_file *file, char *path)
 {
-	if (stat(path, &(file->file_info)) == -1)
+	if (lstat(path, &(file->file_info)) == -1)
 	{
 		if (errno == ENOENT)
 			file->exist = 0;
