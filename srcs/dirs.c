@@ -54,7 +54,7 @@ static int	fill_file(t_list *files, t_flist **list,
 	return (0);
 }
 
-static int	launch_recursive(t_flist **list, char *options)
+static int	recursive(t_flist **list, char *options)
 {
 	char	*file_path;
 
@@ -90,7 +90,7 @@ int			get_files(t_flist **list, char *path, char *options)
 	*list = list_start;
 	sort_print(list, options);
 	if (ft_strchr(options, 'R') != NULL)
-		return (browse_flist(list, options, launch_recursive));
+		return (browse_flist(list, options, recursive));
 	return (0);
 }
 
