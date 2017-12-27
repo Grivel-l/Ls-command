@@ -25,3 +25,18 @@ t_flist		*new_flist(t_file *file)
 	list->next = NULL;
 	return (list);
 }
+
+int			browse_flist(t_flist **list_start, char *options,
+				int (fun)(t_flist **list, char *options))
+{
+	t_flist	*list;
+
+	list = *list_start;
+	while (list != NULL)
+	{
+		if (fun(&list, options) == -1)
+			return (-1);
+		list = list->next;
+	}
+	return (0);
+}

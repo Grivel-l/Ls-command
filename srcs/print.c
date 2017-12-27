@@ -34,27 +34,25 @@ void		print_result(t_flist *list)
 	}
 }
 
-void	sort_print(t_flist **list_start, char *options)
+static int	print_files(t_flist **list, char *options)
 {
-	(void)options;
-	t_flist	*list;
-
-	list = *list_start;
-	if (*list_start != NULL)
+	options = NULL;
+	if ((*list)->file->is_arg && !(*list)->file->exist)
+		enoent_error();
+	else
 	{
-		ft_putstr(list->file->path);
+		ft_putstr((*list)->file->filename);
 		ft_putchar('\n');
 	}
-	while (list != NULL)
+	return (0);
+}
+
+void		sort_print(t_flist **list_start, char *options)
+{
+	if (*list_start != NULL)
 	{
-		if (list->file->is_arg && !list->file->exist)
-			enoent_error();
-		else
-		{
-			ft_putstr(list->file->filename);
-			ft_putchar('\n');
-		}
-		list = list->next;
+		ft_putstr((*list_start)->file->path);
+		ft_putchar('\n');
 	}
-	list = *list_start;
+	browse_flist(list_start, options, print_files);
 }

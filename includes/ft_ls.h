@@ -45,6 +45,8 @@ t_flist				*get_args_list(int argc, char **argv);
 t_file				*new_file(char *filename, char *path, size_t is_arg);
 
 t_flist				*new_flist(t_file *file);
+int					browse_flist(t_flist **list_start, char *options,
+				int (fun)(t_flist **list, char *options));
 
 void				free_args(t_flist *list);
 

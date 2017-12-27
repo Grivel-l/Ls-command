@@ -54,25 +54,18 @@ static int	fill_file(t_list *files, t_flist **list,
 	return (0);
 }
 
-static int	launch_recursive(t_flist **list_start, char *options)
+static int	launch_recursive(t_flist **list, char *options)
 {
-	t_flist **list;
 	char	*file_path;
 
-	list = list_start;
-	while (*list != NULL)
-	{
-		if ((file_path = ft_strjoin((*list)->file->path, (*list)->file->filename)) == NULL)
+	if ((file_path = ft_strjoin((*list)->file->path, (*list)->file->filename)) == NULL)
+		return (-1);
+	if (S_ISDIR((*list)->file->file_info.st_mode) &&
+		ft_strcmp((*list)->file->filename, ".") != 0 &&
+		ft_strcmp((*list)->file->filename, "..") != 0)
+		if (get_files(&((*list)->file->file_list), file_path, options) == -1)
 			return (-1);
-		if (S_ISDIR((*list)->file->file_info.st_mode) &&
-			ft_strcmp((*list)->file->filename, ".") != 0 &&
-			ft_strcmp((*list)->file->filename, "..") != 0)
-			if (get_files(&((*list)->file->file_list), file_path, options) == -1)
-				return (-1);
-		*list = (*list)->next;
-		ft_strdel(&file_path);
-	}
-	*list = *list_start;
+	ft_strdel(&file_path);
 	return (0);
 }
 
@@ -97,7 +90,7 @@ int			get_files(t_flist **list, char *path, char *options)
 	*list = list_start;
 	sort_print(list, options);
 	if (ft_strchr(options, 'R') != NULL)
-		return (launch_recursive(list, options));
+		return (browse_flist(list, options, launch_recursive));
 	return (0);
 }
 
