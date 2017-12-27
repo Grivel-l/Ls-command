@@ -14,6 +14,8 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
+# define BINARY "ft_ls"
+
 # include <dirent.h>
 # include <stdlib.h>
 # include <sys/stat.h>
@@ -55,4 +57,6 @@ void    			sort_print(t_flist **list_start, char *options);
 
 int					read_dir(t_flist **list, char *path, char *options);
 int 				get_files(t_flist **list, char *path, char *options);
+
+void				check_errno(char *path);
 #endif

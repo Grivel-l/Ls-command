@@ -76,7 +76,10 @@ int			get_files(t_flist **list, char *path, char *options)
 	t_list	*previous_file;
 
 	if ((files = ft_readdir(path, ft_strchr(options, 'a') != NULL)) == NULL)
-		return (-1);
+	{
+		check_errno(path);
+		return (errno == EACCES ? -2 : -1);
+	}
 	list_start = NULL;
 	while (files != NULL && files->content_size > 0)
 	{
