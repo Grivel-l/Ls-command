@@ -16,5 +16,5 @@
 void	ft_lstappend(t_list **list, t_list *new)
 {
 	(*list)->next = new;
-	*list = new;
+	*list = (*list)->next;
 }

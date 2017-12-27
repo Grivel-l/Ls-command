@@ -29,12 +29,12 @@ t_list	*ft_readdir(char *filename, size_t get_hidden)
 		{
 			if (start == NULL)
 			{
-				list = ft_lstnew(dir_content->d_name, dir_content->d_namlen);
+				list = ft_lstnew(dir_content->d_name, dir_content->d_reclen);
 				start = list;
 			}
 			else
 				ft_lstappend(&list,
-					ft_lstnew(dir_content->d_name, dir_content->d_namlen));
+					ft_lstnew(dir_content->d_name, dir_content->d_reclen));
 		}
 	}
 	if (closedir(dir) == -1)
