@@ -49,6 +49,8 @@ t_file				*new_file(char *filename, char *path, size_t is_arg);
 
 t_flist				*new_flist(t_file *file);
 t_flist				*set_flist_link(t_flist **list_start, t_list *files, char *path);
+int					browse_reverse_flist(t_flist **list, char *options,
+				int (fun)(t_flist **list, char *options));
 int					browse_flist(t_flist **list, char *options,
 				int (fun)(t_flist **list, char *options));
 int					browse_flist_path(t_flist **list, char *options,
@@ -56,8 +58,7 @@ int					browse_flist_path(t_flist **list, char *options,
 
 int					free_args(t_flist **list, char *options);
 
-void				print_result(t_flist *list);
-void    			sort_print(t_flist **list_start, char *options);
+void    			print_flist(t_flist **list_start, char *options);
 
 int					read_dir(t_flist **list, char *path, char *options);
 int 				get_files(t_flist **list, char *path, char *options);

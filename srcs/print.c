@@ -31,12 +31,15 @@ static int	print_files(t_flist **list, char *options)
 	return (0);
 }
 
-void		sort_print(t_flist **list_start, char *options)
+void		print_flist(t_flist **list_start, char *options)
 {
 	if (*list_start != NULL)
 	{
 		ft_putstr((*list_start)->file->path);
 		ft_putchar('\n');
 	}
-	browse_flist(list_start, options, print_files);
+	if (ft_strchr(options, 'r') != NULL)
+		browse_reverse_flist(list_start, options, print_files);
+	else
+		browse_flist(list_start, options, print_files);
 }

@@ -27,6 +27,20 @@ t_flist		*new_flist(t_file *file)
 	return (list);
 }
 
+int			browse_reverse_flist(t_flist **list, char *options,
+				int (fun)(t_flist **list, char *options))
+{
+	if (*list == NULL)
+		return (0);
+	if ((*list)->left != NULL)
+		browse_flist(&((*list)->left), options, fun);
+	if (fun(list, options) == -1)
+		return (-1);
+	if ((*list)->right != NULL)
+		browse_flist(&((*list)->right), options, fun);
+	return (0);
+}
+
 int			browse_flist(t_flist **list, char *options,
 				int (fun)(t_flist **list, char *options))
 {
