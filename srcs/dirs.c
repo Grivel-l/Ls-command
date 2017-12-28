@@ -27,7 +27,7 @@ static int	fill_infos(t_file *file, char *path)
 	return (0);
 }
 
-static int	fill_file(t_list *files, t_flist **list, char *path)
+static int	fill_file(t_list *files, t_flist **list, char *path, char *options)
 {
 	t_flist	*link;
 	char	*file_path;
@@ -42,7 +42,7 @@ static int	fill_file(t_list *files, t_flist **list, char *path)
 	}
 	else
 	{
-		if ((link = set_flist_link(list, files, file_path)) == NULL)
+		if ((link = set_flist_link(list, files, file_path, options)) == NULL)
 			return (-1);
 	}
 	if ((file_path = ft_strrealloc(file_path, files->content)) == NULL)
@@ -84,7 +84,7 @@ int			get_files(t_flist **list, char *path, char *options)
 	list_start = list;
 	while (files != NULL && files->content_size > 0)
 	{
-		if (fill_file(files, list_start, path) == -1)
+		if (fill_file(files, list_start, path, options) == -1)
 			return (-1);
 		previous_file = files;
 		files = files->next;

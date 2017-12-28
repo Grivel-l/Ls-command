@@ -48,7 +48,8 @@ t_flist				*get_args_list(int argc, char **argv);
 t_file				*new_file(char *filename, char *path, size_t is_arg);
 
 t_flist				*new_flist(t_file *file);
-t_flist				*set_flist_link(t_flist **list_start, t_list *files, char *path);
+t_flist				*set_flist_link(t_flist **list_start, t_list *files,
+				char *path, char *options);
 int					browse_reverse_flist(t_flist **list, char *options,
 				int (fun)(t_flist **list, char *options));
 int					browse_flist(t_flist **list, char *options,
