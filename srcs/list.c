@@ -22,21 +22,35 @@ t_flist		*new_flist(t_file *file)
 	if ((list = malloc(sizeof(t_flist))) == NULL)
 		return (NULL);
 	list->file = file;
-	list->next = NULL;
+	list->left = NULL;
+	list->right = NULL;
 	return (list);
 }
 
-int			browse_flist(t_flist **list_start, char *options,
+int			browse_flist(t_flist **list, char *options,
 				int (fun)(t_flist **list, char *options))
 {
-	t_flist	*list;
+	if (*list == NULL)
+		return (0);
+	if ((*list)->right != NULL)
+		browse_flist(&((*list)->right), options, fun);
+	if (fun(list, options) == -1)
+		return (-1);
+	if ((*list)->left != NULL)
+		browse_flist(&((*list)->left), options, fun);
+	return (0);
+}
 
-	list = *list_start;
-	while (list != NULL)
-	{
-		if (fun(&list, options) == -1)
-			return (-1);
-		list = list->next;
-	}
+int			browse_flist_path(t_flist **list, char *options, char *path,
+				int (fun)(t_flist **list, char *path, char *options))
+{
+	if (*list == NULL)
+		return (0);
+	if ((*list)->right != NULL)
+		browse_flist_path(&((*list)->right), options, path, fun);
+	if (fun(list, path, options) == -1)
+		return (-1);
+	if ((*list)->left != NULL)
+		browse_flist_path(&((*list)->left), options, path, fun);
 	return (0);
 }

@@ -90,9 +90,9 @@ t_flist			*get_args_list(int argc, char **argv)
 			}
 			else
 			{
-				if ((list->next = new_flist(new_file(argv[i - 1], "", 1))) == NULL)
+				if ((list->right = new_flist(new_file(argv[i - 1], "", 1))) == NULL)
 					return (NULL);
-				list = list->next;
+				list = list->right;
 			}
 		}
 	}

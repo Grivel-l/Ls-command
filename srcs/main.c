@@ -22,10 +22,13 @@ int		main(int argc, char **argv)
 		return (-1);
 	if ((list = get_args_list(argc, &(argv[1]))) == NULL)
 		return (-1);
-	if (read_dir(&list, "", options) == -1)
+	if (browse_flist_path(&list, options, "", read_dir) == -1)
+	{
+		printf("Error !\n");
 		return (-1);
+	}
 	// print_result(list);
-	// free_args(list);
+	// browse_flist(&list, options, free_args);
 	free(options);
 	return (0);
 }

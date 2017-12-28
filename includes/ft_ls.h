@@ -38,7 +38,8 @@ typedef struct		s_file
 typedef struct		s_flist
 {
 	t_file			*file;
-	struct s_flist	*next;
+	struct s_flist	*left;
+	struct s_flist	*right;
 }					t_flist;
 
 char				*get_options(int argc, char **argv);
@@ -47,10 +48,13 @@ t_flist				*get_args_list(int argc, char **argv);
 t_file				*new_file(char *filename, char *path, size_t is_arg);
 
 t_flist				*new_flist(t_file *file);
-int					browse_flist(t_flist **list_start, char *options,
+t_flist				*set_flist_link(t_flist **list_start, t_list *files, char *path);
+int					browse_flist(t_flist **list, char *options,
 				int (fun)(t_flist **list, char *options));
+int					browse_flist_path(t_flist **list, char *options,
+				char *path, int (fun)(t_flist **list, char *path, char *options));
 
-void				free_args(t_flist *list);
+int					free_args(t_flist **list, char *options);
 
 void				print_result(t_flist *list);
 void    			sort_print(t_flist **list_start, char *options);
