@@ -131,6 +131,8 @@ int					ft_pushstr(char ***tab, char *str);
 /*
 ** Str functions
 */
+int					ft_strcmp_ci(char const *str1, char const *str2);
+char				*ft_strtolower(char *str);
 char				*ft_strrealloc(char *str, char *to_append);
 /*
 ** Str functions

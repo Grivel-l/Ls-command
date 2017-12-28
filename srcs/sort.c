@@ -28,7 +28,7 @@ static int	sort_time(t_file *file, t_list *target)
 
 static int sort_alpha(t_file *file, t_list *target)
 {
-	return (ft_strcmp(file->filename, target->content));
+	return (ft_strcmp_ci(file->filename, target->content));
 }
 
 static int	sort(t_file *file, t_list *target, size_t time_sort)

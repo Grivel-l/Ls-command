@@ -26,7 +26,8 @@ OBJS = ft_isalpha.o ft_memccpy.o ft_memset.o ft_putnbr_fd.o ft_strcmp.o  \
 	   ft_strmapi.o ft_lstnew.o ft_lstdelone.o ft_lstdel.o ft_lstadd.o \
 	   ft_lstiter.o ft_lstmap.o ft_swap_int.o ft_print_tab.o \
 	   ft_print_int_tab.o ft_isspace.o ft_isupper.o ft_strrealloc.o \
-	   ft_tablen.o ft_puttab.o ft_pushstr.o ft_readdir.o ft_lstappend.o
+	   ft_tablen.o ft_puttab.o ft_pushstr.o ft_readdir.o ft_lstappend.o \
+	   ft_strtolower.o ft_strcmp_ci.o
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
