@@ -27,7 +27,7 @@ int		main(int argc, char **argv)
  		printf("Error !\n");
 		return (-1);
 	}
-	free(list);
+	free_args(&list);
 	// browse_flist(&list, options, free_args);
 	free(options);
 	return (0);

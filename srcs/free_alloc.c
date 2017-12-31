@@ -13,13 +13,18 @@
 
 #include "ft_ls.h"
 
-int		free_args(t_flist **list, char *options)
+int		free_args(t_flist **list)
 {
-	(void)options;
+	t_flist	*next;
+
+	next = (*list)->left;
 	ft_strdel(&((*list)->file->filename));
+	ft_strdel(&((*list)->file->path));
 	free((*list)->file->file_list);
 	free((*list)->file);
 	free(*list);
+	if (next != NULL)
+		free_args(&next);
 	return (0);
 }
 
