@@ -24,10 +24,10 @@ int		main(int argc, char **argv)
 		return (-1);
 	if (browse_flist_path(&list, options, "", read_dir) == -1)
 	{
-		printf("Error !\n");
+ 		printf("Error !\n");
 		return (-1);
 	}
-	// print_result(list);
+	free(list);
 	// browse_flist(&list, options, free_args);
 	free(options);
 	return (0);

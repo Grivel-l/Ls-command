@@ -56,8 +56,10 @@ int					browse_flist(t_flist **list, char *options,
 				int (fun)(t_flist **list, char *options));
 int					browse_flist_path(t_flist **list, char *options,
 				char *path, int (fun)(t_flist **list, char *path, char *options));
+void				browse_flist_suffix(t_flist **list, void (fun)(t_flist **list));
 
 int					free_args(t_flist **list, char *options);
+void				free_flist(t_flist **list_start);
 
 void    			print_flist(t_flist **list_start, char *options);
 

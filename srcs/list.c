@@ -55,6 +55,18 @@ int			browse_flist(t_flist **list, char *options,
 	return (0);
 }
 
+void		browse_flist_suffix(t_flist **list, void (fun)(t_flist **list))
+{
+	if (*list != NULL)
+	{
+		if ((*list)->right != NULL)
+			browse_flist_suffix(&((*list)->right), fun);
+		if ((*list)->left != NULL)
+			browse_flist_suffix(&((*list)->left), fun);
+		fun(list);
+	}
+}
+
 int			browse_flist_path(t_flist **list, char *options, char *path,
 				int (fun)(t_flist **list, char *path, char *options))
 {

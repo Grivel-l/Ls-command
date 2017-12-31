@@ -22,3 +22,34 @@ int		free_args(t_flist **list, char *options)
 	free(*list);
 	return (0);
 }
+
+static void	free_file(t_file *file)
+{
+	if (file != NULL)
+	{
+		ft_strdel(&(file->filename));
+		ft_strdel(&(file->path));
+		if (file->file_list != NULL)
+			free_flist(&(file->file_list));
+		free(file);
+		file = NULL;
+	}
+}
+
+void		free_flist(t_flist **list_start)
+{
+	t_flist	*list;
+
+	list = *list_start;
+	free_file(list->file);
+	if (list->left != NULL)
+	{
+		free(list->left);
+		list->left = NULL;
+	}
+	if (list->right != NULL)
+	{
+		free(list->right);
+		list->right = NULL;
+	}
+}
