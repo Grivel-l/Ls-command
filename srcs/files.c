@@ -20,6 +20,7 @@ t_file		*new_file(char *filename, char *path, size_t is_arg)
 	if ((file = malloc(sizeof(t_file))) == NULL)
 		return (NULL);
 	file->is_arg = is_arg;
+	file->permissions = 0;
 	file->file_list = NULL;
 	if ((file->path = ft_strdup(path)) == NULL)
 		return (NULL);

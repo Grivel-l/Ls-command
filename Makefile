@@ -12,7 +12,8 @@
 # **************************************************************************** #
 
 NAME = ft_ls
-SRCS = main.c args.c files.c list.c free_alloc.c print.c dirs.c errors.c sort.c
+SRCS = main.c args.c files.c list.c free_alloc.c print.c dirs.c errors.c \
+	   sort.c infos.c
 OBJS = $(SRCS:.c=.o)
 SRCS_PATH = ./srcs/
 INCS_PATH = ./includes/

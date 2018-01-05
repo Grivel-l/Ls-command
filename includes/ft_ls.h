@@ -29,6 +29,7 @@ typedef struct		s_file
 	size_t			exist;
 	size_t			is_arg;
 	size_t			is_file;
+	size_t			permissions;
 	char			*filename;
 	char			*path;
 	struct stat		file_info;
@@ -65,6 +66,8 @@ void    			print_flist(t_flist **list_start, char *options);
 
 int					read_dir(t_flist **list, char *path, char *options);
 int 				get_files(t_flist **list, char *path, char *options);
+
+int					fill_infos(t_file *file, char *path, char *options);
 
 void				check_errno(char *path);
 #endif

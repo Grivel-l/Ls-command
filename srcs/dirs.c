@@ -13,20 +13,6 @@
 
 #include "ft_ls.h"
 
-static int	fill_infos(t_file *file, char *path)
-{
-	if (lstat(path, &(file->file_info)) == -1)
-	{
-		if (errno == ENOENT)
-			file->exist = 0;
-		else
-			return (-1);
-	}
-	else
-		file->exist = 1;
-	return (0);
-}
-
 static int	fill_file(t_list *files, t_flist **list, char *path, char *options)
 {
 	t_flist	*link;
@@ -47,7 +33,7 @@ static int	fill_file(t_list *files, t_flist **list, char *path, char *options)
 	}
 	if ((file_path = ft_strrealloc(file_path, files->content)) == NULL)
 		return (-1);
-	if (fill_infos(link == NULL ? (*list)->file : link->file, file_path) == -1)
+	if (fill_infos(link == NULL ? (*list)->file : link->file, file_path, options) == -1)
 		return (-1);
 	ft_strdel(&file_path);
 	return (0);
@@ -112,7 +98,7 @@ int			read_dir(t_flist **list, char *path, char *options)
 
 	if ((file_path = ft_strjoin((*list)->file->filename, path)) == NULL)
 		return (-1);
-	if (fill_infos((*list)->file, file_path) == -1)
+	if (fill_infos((*list)->file, file_path, options) == -1)
 	{
 		ft_strdel(&file_path);
 		return (-1);
