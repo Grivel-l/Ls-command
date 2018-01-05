@@ -82,7 +82,13 @@ int			get_files(t_flist **list, char *path, char *options)
 		return (errno == EACCES ? -2 : -1);
 	}
 	list_start = list;
-	while (files != NULL && files->content_size > 0)
+	if (files->content_size == 0)
+	{
+		free(files->content);
+		free(files);
+		files = NULL;
+	}
+	while (files != NULL)
 	{
 		if (fill_file(files, list_start, path, options) == -1)
 			return (-1);
