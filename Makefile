@@ -12,11 +12,11 @@
 # **************************************************************************** #
 
 NAME = ft_ls
-SRCS = main.c args.c files.c list.c free_alloc.c print.c dirs.c
+SRCS = main.c args.c files.c list.c free_alloc.c print.c dirs.c errors.c sort.c
 OBJS = $(SRCS:.c=.o)
 SRCS_PATH = ./srcs/
 INCS_PATH = ./includes/
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -O3
+FLAGS = -Wall -Wextra -Werror -O3 -fsanitize=address
 COMPILER = clang
 
 all: $(NAME)

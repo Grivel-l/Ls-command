@@ -93,8 +93,10 @@ int			get_files(t_flist **list, char *path, char *options)
 	}
 	print_flist(list_start, options);
 	if (ft_strchr(options, 'R') != NULL)
-		return (browse_flist(list_start, options, recursive));
+		browse_flist(list_start, options, recursive);
 	browse_flist_suffix(list_start, free_flist);
+	free(*list_start);
+	*list_start = NULL;
 	return (0);
 }
 

@@ -20,24 +20,32 @@ int		free_args(t_flist **list)
 	next = (*list)->left;
 	ft_strdel(&((*list)->file->filename));
 	ft_strdel(&((*list)->file->path));
-	free((*list)->file->file_list);
+	if ((*list)->file->file_list != NULL)
+	{
+		free((*list)->file->file_list);
+		(*list)->file->file_list = NULL;
+	}
 	free((*list)->file);
 	free(*list);
+	*list = NULL;
 	if (next != NULL)
 		free_args(&next);
 	return (0);
 }
 
-static void	free_file(t_file *file)
+void	free_file(t_file **file)
 {
-	if (file != NULL)
+	if (*file != NULL)
 	{
-		ft_strdel(&(file->filename));
-		ft_strdel(&(file->path));
-		if (file->file_list != NULL)
-			free_flist(&(file->file_list));
-		free(file);
-		file = NULL;
+		ft_strdel(&((*file)->filename));
+		ft_strdel(&((*file)->path));
+		if ((*file)->file_list != NULL)
+		{
+			free_flist(&((*file)->file_list));
+			(*file)->file_list = NULL;
+		}
+		free(*file);
+		*file = NULL;
 	}
 }
 
@@ -46,7 +54,7 @@ void		free_flist(t_flist **list_start)
 	t_flist	*list;
 
 	list = *list_start;
-	free_file(list->file);
+	free_file(&(list->file));
 	if (list->left != NULL)
 	{
 		free(list->left);

@@ -28,7 +28,6 @@ int		main(int argc, char **argv)
 		return (-1);
 	}
 	free_args(&list);
-	// browse_flist(&list, options, free_args);
 	free(options);
 	return (0);
 }
