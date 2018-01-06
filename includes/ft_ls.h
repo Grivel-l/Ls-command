@@ -22,6 +22,8 @@
 # include <time.h>
 # include <errno.h>
 # include <stdio.h>
+# include <grp.h>
+# include <pwd.h>
 # include "../libft/libft.h"
 
 typedef struct		s_file
