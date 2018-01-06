@@ -11,3 +11,8 @@ void	check_errno(char *path)
 		ft_putstr_fd("': Permission denied\n", 2);
 	}
 }
+
+void	enoent_error(void)
+{
+	ft_putstr_fd("The file doesn't exist\n", 2);
+}
