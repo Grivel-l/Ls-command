@@ -28,7 +28,9 @@ static int	sort_time(t_file *file, t_list *target)
 
 static int sort_alpha(t_file *file, t_list *target)
 {
-	return (ft_strcmp_ci(file->filename, target->content));
+	return (ft_strcmp_ci(file->filename[0] == '.' ?
+							&(file->filename[1]) : file->filename,
+			((char *)(target->content))[0] == '.' ? &(target->content[1]) : target->content));
 }
 
 static int	sort(t_file *file, t_list *target, size_t time_sort)
@@ -41,7 +43,6 @@ static int	sort(t_file *file, t_list *target, size_t time_sort)
 	if (ft_strcmp(target->content, ".") == 0 ||
 		ft_strcmp(target->content, "..") == 0)
 		return (1);
-	are_equal = 0;
 	are_equal = 0;
 	if (time_sort)
 		are_equal = sort_time(file, target);
