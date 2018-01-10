@@ -13,13 +13,13 @@
 
 #include "ft_ls.h"
 
-t_file		*new_file(char *filename, char *path, size_t is_arg)
+t_file		*new_file(char *filename, char *path, size_t print_arg)
 {
 	t_file	*file;
 
 	if ((file = malloc(sizeof(t_file))) == NULL)
 		return (NULL);
-	file->is_arg = is_arg;
+	file->print_arg = print_arg;
 	file->permissions = 0;
 	file->file_list = NULL;
 	if ((file->path = ft_strdup(path)) == NULL)

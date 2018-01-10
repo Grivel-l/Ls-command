@@ -35,7 +35,7 @@ static void	print_as_list(t_file *file)
 
 static int	print_files(t_flist **list, char *options)
 {
-	if ((*list)->file->is_arg && !(*list)->file->exist)
+	if (!(*list)->file->exist)
 		enoent_error();
 	else
 	{
@@ -47,21 +47,37 @@ static int	print_files(t_flist **list, char *options)
 		else
 		{
 			ft_putstr((*list)->file->filename);
-			ft_putchar('\n');
+			ft_putstr("  ");
 		}
 	}
 	return (0);
 }
 
+void		print_arg(char *arg, char *options)
+{
+	(void)options;
+	ft_putstr(arg);
+	ft_putstr(":\n");
+}
+
 void		print_flist(t_flist **list_start, char *options)
 {
+	static size_t	i = 0;
 	if (*list_start != NULL)
 	{
-		ft_putstr((*list_start)->file->path);
-		ft_putchar('\n');
+		if (i > 0)
+		{
+			if (ft_strchr(options, 'l') != NULL)
+				ft_putchar('\n');
+			else
+				ft_putstr("\n\n");
+		}
+		i += 1;
+		if (ft_strchr(options, 'R') != NULL)
+			print_arg((*list_start)->file->path, options);
+		if (ft_strchr(options, 'r') != NULL)
+			browse_reverse_flist(list_start, options, print_files);
+		else
+			browse_flist(list_start, options, print_files);
 	}
-	if (ft_strchr(options, 'r') != NULL)
-		browse_reverse_flist(list_start, options, print_files);
-	else
-		browse_flist(list_start, options, print_files);
 }

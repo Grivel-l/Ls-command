@@ -98,15 +98,16 @@ int			read_dir(t_flist **list, char *path, char *options)
 
 	if ((file_path = ft_strjoin((*list)->file->filename, path)) == NULL)
 		return (-1);
+	if ((*list)->file->print_arg)
+		print_arg(file_path, options);
 	if (fill_infos((*list)->file, file_path, options) == -1)
 	{
 		ft_strdel(&file_path);
 		return (-1);
 	}
-	if ((*list)->file->is_arg)
-		if (get_files(&((*list)->file->file_list),
-					file_path, options) == -1)
-			return (-1);
+	if (get_files(&((*list)->file->file_list),
+				file_path, options) == -1)
+		return (-1);
 	ft_strdel(&file_path);
 	return (0);
 }

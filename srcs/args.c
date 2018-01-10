@@ -42,9 +42,25 @@ static int		add_option(char **options, char c)
 	return (0);
 }
 
-char			*get_options(int argc, char **argv)
+static size_t	get_args_nbr(size_t argc, char **argv)
 {
-	int		i;
+	size_t	i;
+	size_t	args_nbr;
+
+	i = 0;
+	args_nbr = 0;
+	while (i < argc - 1)
+	{
+		if (argv[i][0] != '-')
+			args_nbr += 1;
+		i += 1;
+	}
+	return (args_nbr);
+}
+
+char			*get_options(size_t argc, char **argv)
+{
+	size_t	i;
 	char	*pointer;
 	char	*options;
 
@@ -70,31 +86,33 @@ char			*get_options(int argc, char **argv)
 	return (options);
 }
 
-t_flist			*get_args_list(int argc, char **argv)
+t_flist			*get_args_list(size_t argc, char **argv)
 {
-	int		i;
+	size_t	i;
 	t_flist	*list;
 	t_flist	*pointer;
+	size_t	args_nbr;
 
 	i = 0;
 	pointer = NULL;
+	args_nbr = get_args_nbr(argc, argv);
 	while (i < argc - 1)
 	{
 		if (argv[i++][0] != '-')
 		{
 			if (pointer == NULL)
 			{
-				if ((list = new_flist(new_file(argv[i - 1], "", 1))) == NULL)
+				if ((list = new_flist(new_file(argv[i - 1], "", args_nbr > 1))) == NULL)
 					return (NULL);
 				pointer = list;
 			}
 			else
 			{
-				if ((list->left = new_flist(new_file(argv[i - 1], "", 1))) == NULL)
+				if ((list->left = new_flist(new_file(argv[i - 1], "", args_nbr > 1))) == NULL)
 					return (NULL);
 				list = list->left;
 			}
 		}
 	}
-	return (pointer == NULL ? new_flist(new_file(".", "", 1)) : pointer);
+	return (pointer == NULL ? new_flist(new_file(".", "", 0)) : pointer);
 }

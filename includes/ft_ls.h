@@ -29,7 +29,7 @@
 typedef struct		s_file
 {
 	size_t			exist;
-	size_t			is_arg;
+	size_t			print_arg;
 	size_t			is_file;
 	size_t			permissions;
 	char			*filename;
@@ -45,12 +45,12 @@ typedef struct		s_flist
 	struct s_flist	*right;
 }					t_flist;
 
-char				*get_options(int argc, char **argv);
-t_flist				*get_args_list(int argc, char **argv);
+char				*get_options(size_t argc, char **argv);
+t_flist				*get_args_list(size_t argc, char **argv);
 
-t_file				*new_file(char *filename, char *path, size_t is_arg);
-
+t_file				*new_file(char *filename, char *path, size_t print_arg);
 t_flist				*new_flist(t_file *file);
+
 t_flist				*set_flist_link(t_flist **list_start, t_list *files,
 				char *path, char *options);
 int					browse_reverse_flist(t_flist **list, char *options,
@@ -68,6 +68,7 @@ void				print_time(char *time);
 void				print_filetype(mode_t st_mode);
 void				print_permissions(size_t permissions);
 void    			print_flist(t_flist **list_start, char *options);
+void				print_arg(char *arg, char *options);
 
 int					read_dir(t_flist **list, char *path, char *options);
 int 				get_files(t_flist **list, char *path, char *options);

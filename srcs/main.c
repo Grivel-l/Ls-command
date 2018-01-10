@@ -18,6 +18,7 @@ int		main(int argc, char **argv)
 	t_flist	*list;
 	char	*options;
 
+	argc = (size_t)argc;
 	if ((options = get_options(argc, &(argv[1]))) == NULL)
 		return (-1);
 	if ((list = get_args_list(argc, &(argv[1]))) == NULL)
