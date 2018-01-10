@@ -13,27 +13,33 @@
 
 #include "ft_ls.h"
 
-int		main(int argc, char **argv)
+static int	exit_error(t_flist *list, char *options)
+{
+	ft_putstr_fd("Error\n", 2);
+	if (options != NULL)
+		ft_strdel(&options);
+	if (list != NULL)
+	{
+		browse_flist_suffix(&list, free_flist);
+		free(list);
+	}
+	return (-1);
+}
+
+int			main(int argc, char **argv)
 {
 	t_flist	*list;
 	char	*options;
 
+	list = NULL;
+	options = NULL;
 	argc = (size_t)argc;
 	if ((options = get_options(argc, &(argv[1]))) == NULL)
-		return (-1);
+		return (exit_error(list, options));
 	if ((list = get_args_list(argc, &(argv[1]))) == NULL)
-	{
-		ft_strdel(&options);
-		return (-1);
-	}
+		return (exit_error(list, options));
 	if (browse_flist_path(&list, options, "", read_dir) == -1)
-	{
-		ft_putstr_fd("Error\n", 2);
-		ft_strdel(&options);
-		browse_flist_suffix(&list, free_flist);
-		free(list);
-		return (-1);
-	}
+		return (exit_error(list, options));
 	if (ft_strchr(options, 'l') == NULL)
 		ft_putchar('\n');
 	free_args(&list);
