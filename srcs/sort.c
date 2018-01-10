@@ -35,6 +35,13 @@ static int	sort(t_file *file, t_list *target, size_t time_sort)
 {
 	size_t	are_equal;
 
+	if (ft_strcmp(file->filename, ".") == 0 ||
+		ft_strcmp(file->filename, "..") == 0)
+		return (-1);
+	if (ft_strcmp(target->content, ".") == 0 ||
+		ft_strcmp(target->content, "..") == 0)
+		return (1);
+	are_equal = 0;
 	are_equal = 0;
 	if (time_sort)
 		are_equal = sort_time(file, target);
