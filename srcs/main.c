@@ -28,6 +28,8 @@ int		main(int argc, char **argv)
  		printf("Error !\n");
 		return (-1);
 	}
+	if (ft_strchr(options, 'l') == NULL)
+		ft_putchar('\n');
 	free_args(&list);
 	free(options);
 	return (0);
