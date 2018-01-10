@@ -87,6 +87,8 @@ int			get_files(t_flist **list, char *path, char *options)
 	if (ft_strchr(options, 'R') != NULL)
 		browse_flist(list_start, options, recursive);
 	browse_flist_suffix(list_start, free_flist);
+	if ((*list_start) == NULL)
+		print_void_arg(path);
 	free(*list_start);
 	*list_start = NULL;
 	return (0);
@@ -99,7 +101,7 @@ int			read_dir(t_flist **list, char *path, char *options)
 	if ((file_path = ft_strjoin((*list)->file->filename, path)) == NULL)
 		return (-1);
 	if ((*list)->file->print_arg)
-		print_arg(file_path, options);
+		print_arg(file_path);
 	if (fill_infos((*list)->file, file_path, options) == -1)
 	{
 		ft_strdel(&file_path);

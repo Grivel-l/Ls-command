@@ -58,9 +58,14 @@ static void	putstr_r(char *arg)
 	write(1, arg, ft_strlen(arg) - 1);
 }
 
-void		print_arg(char *arg, char *options)
+void		print_void_arg(char *arg)
 {
-	(void)options;
+	ft_putstr(arg);
+	ft_putchar(':');
+}
+
+void		print_arg(char *arg)
+{
 	putstr_r(arg);
 	ft_putstr(":\n");
 }
@@ -68,18 +73,18 @@ void		print_arg(char *arg, char *options)
 void		print_flist(t_flist **list_start, char *options)
 {
 	static size_t	i = 0;
+	if (i > 0)
+	{
+		if (ft_strchr(options, 'l') != NULL)
+			ft_putchar('\n');
+		else
+			ft_putstr("\n\n");
+	}
+		i += 1;
 	if (*list_start != NULL)
 	{
-		if (i > 0)
-		{
-			if (ft_strchr(options, 'l') != NULL)
-				ft_putchar('\n');
-			else
-				ft_putstr("\n\n");
-		}
-		i += 1;
 		if (ft_strchr(options, 'R') != NULL)
-			print_arg((*list_start)->file->path, options);
+			print_arg((*list_start)->file->path);
 		if (ft_strchr(options, 'r') != NULL)
 			browse_reverse_flist(list_start, options, print_files);
 		else

@@ -64,11 +64,12 @@ void				browse_flist_suffix(t_flist **list, void (fun)(t_flist **list));
 int					free_args(t_flist **list);
 void				free_flist(t_flist **list_start);
 
+void				print_arg(char *arg);
 void				print_time(char *time);
+void				print_void_arg(char *arg);
 void				print_filetype(mode_t st_mode);
 void				print_permissions(size_t permissions);
 void    			print_flist(t_flist **list_start, char *options);
-void				print_arg(char *arg, char *options);
 
 int					read_dir(t_flist **list, char *path, char *options);
 int 				get_files(t_flist **list, char *path, char *options);
