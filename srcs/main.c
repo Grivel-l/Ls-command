@@ -22,10 +22,16 @@ int		main(int argc, char **argv)
 	if ((options = get_options(argc, &(argv[1]))) == NULL)
 		return (-1);
 	if ((list = get_args_list(argc, &(argv[1]))) == NULL)
+	{
+		ft_strdel(&options);
 		return (-1);
+	}
 	if (browse_flist_path(&list, options, "", read_dir) == -1)
 	{
- 		printf("Error !\n");
+		ft_putstr_fd("Error\n", 2);
+		ft_strdel(&options);
+		browse_flist_suffix(&list, free_flist);
+		free(list);
 		return (-1);
 	}
 	if (ft_strchr(options, 'l') == NULL)

@@ -109,7 +109,10 @@ int			read_dir(t_flist **list, char *path, char *options)
 	}
 	if (get_files(&((*list)->file->file_list),
 				file_path, options) == -1)
+	{
+		ft_strdel(&file_path);
 		return (-1);
+	}
 	ft_strdel(&file_path);
 	return (0);
 }
