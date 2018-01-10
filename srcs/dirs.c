@@ -24,17 +24,29 @@ static int	fill_file(t_list *files, t_flist **list, char *path, char *options)
 	if (*list == NULL)
 	{
 		if ((*list = new_flist(new_file(files->content, file_path, 0))) == NULL)
+		{
+			ft_strdel(&file_path);
 			return (-1);
+		}
 	}
 	else
 	{
 		if ((link = set_flist_link(list, files, file_path, options)) == NULL)
+		{
+			ft_strdel(&file_path);
 			return (-1);
+		}
 	}
 	if ((file_path = ft_strrealloc(file_path, files->content)) == NULL)
+	{
+		ft_strdel(&file_path);
 		return (-1);
+	}
 	if (fill_infos(link == NULL ? (*list)->file : link->file, file_path, options) == -1)
+	{
+		ft_strdel(&file_path);
 		return (-1);
+	}
 	ft_strdel(&file_path);
 	return (0);
 }
@@ -50,7 +62,10 @@ static int	recursive(t_flist **list, char *options)
 		ft_strcmp((*list)->file->filename, "..") != 0)
 	{
 		if (get_files(&((*list)->file->file_list), file_path, options) == -1)
+		{
+			ft_strdel(&file_path);
 			return (-1);
+		}
 	}
 	ft_strdel(&file_path);
 	return (0);
@@ -77,7 +92,10 @@ int			get_files(t_flist **list, char *path, char *options)
 	while (files != NULL)
 	{
 		if (fill_file(files, list_start, path, options) == -1)
+		{
+			free_files(files);
 			return (-1);
+		}
 		previous_file = files;
 		files = files->next;
 		free(previous_file->content);

@@ -20,7 +20,10 @@ t_flist		*new_flist(t_file *file)
 	if (file == NULL)
 		return (NULL);
 	if ((list = malloc(sizeof(t_flist))) == NULL)
+	{
+		free(file);
 		return (NULL);
+	}
 	list->file = file;
 	list->left = NULL;
 	list->right = NULL;

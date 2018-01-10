@@ -63,6 +63,7 @@ void				browse_flist_suffix(t_flist **list, void (fun)(t_flist **list));
 
 int					free_args(t_flist **list);
 void				free_flist(t_flist **list_start);
+void				free_files(t_list *files);
 
 void				print_arg(char *arg);
 void				print_time(char *time);

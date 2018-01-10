@@ -33,6 +33,19 @@ int		free_args(t_flist **list)
 	return (0);
 }
 
+void		free_files(t_list *files)
+{
+	t_list	*previous_file;
+
+	while (files != NULL)
+	{
+		previous_file = files;
+		files = files->next;
+		free(previous_file->content);
+		free(previous_file);
+	}
+}
+
 void	free_file(t_file **file)
 {
 	if (*file != NULL)
