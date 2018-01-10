@@ -53,10 +53,15 @@ static int	print_files(t_flist **list, char *options)
 	return (0);
 }
 
+static void	putstr_r(char *arg)
+{
+	write(1, arg, ft_strlen(arg) - 1);
+}
+
 void		print_arg(char *arg, char *options)
 {
 	(void)options;
-	ft_putstr(arg);
+	putstr_r(arg);
 	ft_putstr(":\n");
 }
 
