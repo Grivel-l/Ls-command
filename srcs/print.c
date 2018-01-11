@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/27 00:41:32 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/11 11:28:43 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,8 @@ static void	print_as_list(t_file *file)
 	ft_putchar(' ');
 	ft_putnbr(file->file_info.st_size);
 	ft_putchar(' ');
-	print_time(ctime(&(file->file_info.st_mtim.tv_sec)));
+	// print_time(ctime(&(file->file_info.st_mtim.tv_sec)));
+	print_time(ctime(&(file->file_info.st_mtimespec.tv_sec)));
 	ft_putchar(' ');
 	ft_putstr(file->filename);
 }
@@ -58,10 +59,12 @@ static void	putstr_r(char *arg)
 	write(1, arg, ft_strlen(arg) - 1);
 }
 
-void		print_void_arg(char *arg)
+void		print_void_arg(char *arg, char *options)
 {
 	ft_putstr(arg);
 	ft_putchar(':');
+	if (ft_strchr(options, 'l') != NULL)
+		ft_putchar('\n');
 }
 
 void		print_arg(char *arg)
@@ -73,6 +76,7 @@ void		print_arg(char *arg)
 void		print_flist(t_flist **list_start, char *options)
 {
 	static size_t	i = 0;
+
 	if (i > 0)
 	{
 		if (ft_strchr(options, 'l') != NULL)
