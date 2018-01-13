@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/26 22:39:59 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/13 20:55:51 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -102,17 +102,17 @@ t_flist			*get_args_list(size_t argc, char **argv)
 		{
 			if (pointer == NULL)
 			{
-				if ((list = new_flist(new_file(argv[i - 1], "", args_nbr > 1))) == NULL)
+				if ((list = new_flist(new_file(argv[i - 1], "", args_nbr > 1, 1))) == NULL)
 					return (NULL);
 				pointer = list;
 			}
 			else
 			{
-				if ((list->left = new_flist(new_file(argv[i - 1], "", args_nbr > 1))) == NULL)
+				if ((list->left = new_flist(new_file(argv[i - 1], "", args_nbr > 1, 1))) == NULL)
 					return (NULL);
 				list = list->left;
 			}
 		}
 	}
-	return (pointer == NULL ? new_flist(new_file(".", "", 0)) : pointer);
+	return (pointer == NULL ? new_flist(new_file(".", "", 0, 1)) : pointer);
 }

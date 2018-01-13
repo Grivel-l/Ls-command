@@ -6,14 +6,14 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/11 12:35:51 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/13 20:57:15 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int	fill_file(t_list *files, t_flist **list, char *path, char *options)
+static int	fill_file(t_list *files, t_flist **list, char *path, char *options, size_t print_arg)
 {
 	t_flist	*link;
 	char	*file_path;
@@ -23,7 +23,7 @@ static int	fill_file(t_list *files, t_flist **list, char *path, char *options)
 	link = NULL;
 	if (*list == NULL)
 	{
-		if ((*list = new_flist(new_file(files->content, file_path, 0))) == NULL)
+		if ((*list = new_flist(new_file(files->content, file_path, print_arg, 0))) == NULL)
 		{
 			ft_strdel(&file_path);
 			return (-1);
@@ -61,7 +61,7 @@ static int	recursive(t_flist **list, char *options)
 		ft_strcmp((*list)->file->filename, ".") != 0 &&
 		ft_strcmp((*list)->file->filename, "..") != 0)
 	{
-		if (get_files(&((*list)->file->file_list), file_path, options) == -1)
+		if (get_files(&((*list)->file->file_list), file_path, options, 1) == -1)
 		{
 			ft_strdel(&file_path);
 			return (-1);
@@ -71,7 +71,7 @@ static int	recursive(t_flist **list, char *options)
 	return (0);
 }
 
-int			get_files(t_flist **list, char *path, char *options)
+int			get_files(t_flist **list, char *path, char *options, size_t print_arg)
 {
 	t_list	*files;
 	t_flist	**list_start;
@@ -91,7 +91,7 @@ int			get_files(t_flist **list, char *path, char *options)
 	}
 	while (files != NULL)
 	{
-		if (fill_file(files, list_start, path, options) == -1)
+		if (fill_file(files, list_start, path, options, print_arg) == -1)
 		{
 			free_files(files);
 			return (-1);
@@ -118,19 +118,21 @@ int			read_dir(t_flist **list, char *path, char *options)
 
 	if ((file_path = ft_strjoin((*list)->file->filename, path)) == NULL)
 		return (-1);
-	if ((*list)->file->print_arg)
-		print_arg(file_path);
 	if (fill_infos((*list)->file, file_path, options) == -1)
 	{
 		ft_strdel(&file_path);
 		return (-1);
 	}
-	if (get_files(&((*list)->file->file_list),
-				file_path, options) == -1)
+	if ((*list)->file->exist && (*list)->file->print_arg)
+		print_arg((*list)->file);
+	if ((*list)->file->exist && get_files(&((*list)->file->file_list),
+				file_path, options, (*list)->file->print_arg) == -1)
 	{
 		ft_strdel(&file_path);
 		return (-1);
 	}
+	else if (!(*list)->file->exist)
+		enoent_error((*list)->file->filename);
 	ft_strdel(&file_path);
 	return (0);
 }

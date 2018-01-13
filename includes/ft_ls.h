@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/11 11:28:00 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/13 20:55:19 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,6 +29,7 @@
 typedef struct		s_file
 {
 	size_t			exist;
+	size_t			is_arg;
 	size_t			print_arg;
 	size_t			is_file;
 	size_t			permissions;
@@ -48,7 +49,7 @@ typedef struct		s_flist
 char				*get_options(size_t argc, char **argv);
 t_flist				*get_args_list(size_t argc, char **argv);
 
-t_file				*new_file(char *filename, char *path, size_t print_arg);
+t_file				*new_file(char *filename, char *path, size_t print_arg, size_t is_arg);
 t_flist				*new_flist(t_file *file);
 
 t_flist				*set_flist_link(t_flist **list_start, t_list *files,
@@ -65,7 +66,7 @@ int					free_args(t_flist **list);
 void				free_flist(t_flist **list_start);
 void				free_files(t_list *files);
 
-void				print_arg(char *arg);
+void				print_arg(t_file *file);
 void				print_time(char *time);
 void				print_filetype(mode_t st_mode);
 void				print_permissions(size_t permissions);
@@ -73,10 +74,10 @@ void				print_void_arg(char *arg, char *options);
 void    			print_flist(t_flist **list_start, char *options);
 
 int					read_dir(t_flist **list, char *path, char *options);
-int 				get_files(t_flist **list, char *path, char *options);
+int 				get_files(t_flist **list, char *path, char *options, size_t print_arg);
 
 int					fill_infos(t_file *file, char *path, char *options);
 
 void				check_errno(char *path);
-void				enoent_error(void);
+void				enoent_error(char *filename);
 #endif

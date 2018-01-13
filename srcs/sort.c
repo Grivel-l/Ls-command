@@ -6,18 +6,12 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/26 23:54:59 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/13 17:54:13 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/13 20:57:42 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void	sort_list(t_flist **list, char *options)
-{
-	(void)list;
-	(void)options;
-}
 
 static int	sort_time(t_file *file, t_list *target)
 {
@@ -54,7 +48,7 @@ static int	sort(t_file *file, t_list *target, size_t time_sort)
 	if (ft_strcmp(target->content, ".") == 0 ||
 		ft_strcmp(target->content, "..") == 0)
 		return (1);
-	are_equal = 0;
+	are_equal = 2;
 	if (time_sort)
 		are_equal = sort_time(file, target);
 	if (are_equal == -1)
@@ -81,7 +75,7 @@ t_flist	*set_flist_link(t_flist **list_start,
 			if (list->left == NULL)
 			{
 				if ((list->left =
-			new_flist(new_file(files->content, path, 0))) == NULL)
+			new_flist(new_file(files->content, path, 0, 0))) == NULL)
 					return (NULL);
 				list = list->left;
 				break ;
@@ -94,7 +88,7 @@ t_flist	*set_flist_link(t_flist **list_start,
 			if (list->right == NULL)
 			{
 				if ((list->right =
-			new_flist(new_file(files->content, path, 0))) == NULL)
+			new_flist(new_file(files->content, path, 0, 0))) == NULL)
 					return (NULL);
 				list = list->right;
 				break ;

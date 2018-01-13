@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/11 11:28:43 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/13 20:58:08 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,7 +37,7 @@ static void	print_as_list(t_file *file)
 static int	print_files(t_flist **list, char *options)
 {
 	if (!(*list)->file->exist)
-		enoent_error();
+		enoent_error((*list)->file->filename);
 	else
 	{
 		if (ft_strchr(options, 'l') != NULL)
@@ -59,18 +59,24 @@ static void	putstr_r(char *arg)
 	write(1, arg, ft_strlen(arg) - 1);
 }
 
+void		print_arg(t_file *file)
+{
+	if (file->print_arg && !file->is_arg)
+	{
+		if (ft_strcmp(file->path, ".") == 0)
+			ft_putstr(file->path);
+		else
+			putstr_r(file->path);
+		ft_putstr(":\n");
+	}
+}
+
 void		print_void_arg(char *arg, char *options)
 {
 	ft_putstr(arg);
 	ft_putchar(':');
 	if (ft_strchr(options, 'l') != NULL)
 		ft_putchar('\n');
-}
-
-void		print_arg(char *arg)
-{
-	putstr_r(arg);
-	ft_putstr(":\n");
 }
 
 void		print_flist(t_flist **list_start, char *options)
@@ -88,7 +94,7 @@ void		print_flist(t_flist **list_start, char *options)
 	if (*list_start != NULL)
 	{
 		if (ft_strchr(options, 'R') != NULL)
-			print_arg((*list_start)->file->path);
+			print_arg((*list_start)->file);
 		if (ft_strchr(options, 'r') != NULL)
 			browse_reverse_flist(list_start, options, print_files);
 		else

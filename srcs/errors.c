@@ -1,9 +1,14 @@
 #include "ft_ls.h"
 
-void	check_errno(char *path)
+static void	print_prefix(void)
 {
 	ft_putstr_fd(BINARY, 2);
 	ft_putstr_fd(": ", 2);
+}
+
+void		check_errno(char *path)
+{
+	print_prefix();
 	if (errno == EACCES)
 	{
 		ft_putstr_fd("cannot open directory '", 2);
@@ -12,7 +17,10 @@ void	check_errno(char *path)
 	}
 }
 
-void	enoent_error(void)
+void		enoent_error(char *filename)
 {
-	ft_putstr_fd("The file doesn't exist\n", 2);
+	print_prefix();
+	ft_putstr_fd(filename, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd("No such file or directory\n", 2);
 }
