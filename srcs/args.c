@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 19:57:42 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 20:02:43 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,7 +51,7 @@ static size_t	get_args_nbr(size_t argc, char **argv)
 	args_nbr = 0;
 	while (i < argc - 1)
 	{
-		if (argv[i][0] != '-' && argv[i][1] != '\0')
+		if (argv[i][0] != '-' || (argv[i][0] == '-' && argv[i][1] == '\0') || args_nbr > 0)
 			args_nbr += 1;
 		i += 1;
 	}
@@ -92,14 +92,17 @@ t_flist			*get_args_list(size_t argc, char **argv)
 	t_flist	*list;
 	t_flist	*pointer;
 	size_t	args_nbr;
+	char	options_readed;
 
 	i = 0;
 	pointer = NULL;
+	options_readed = 0;
 	args_nbr = get_args_nbr(argc, argv);
 	while (i < argc - 1)
 	{
-		if (argv[i][0] != '-' || (argv[i][0] == '-' && argv[i][1] == '\0'))
+		if (argv[i][0] != '-' || (argv[i][0] == '-' && argv[i][1] == '\0') || options_readed)
 		{
+			options_readed = 1;
 			if (pointer == NULL)
 			{
 				if ((list = new_flist(new_file(argv[i], "", args_nbr > 1, 1))) == NULL)
