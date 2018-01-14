@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:34:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/13 19:51:01 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 20:10:50 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,6 @@
 
 static int	exit_error(t_flist *list, char *options)
 {
-	ft_putstr_fd("Error\n", 2);
 	if (options != NULL)
 		ft_strdel(&options);
 	if (list != NULL)

@@ -6,6 +6,14 @@ static void	print_prefix(void)
 	ft_putstr_fd(": ", 2);
 }
 
+static void	print_usage(void)
+{
+	ft_putstr_fd("usage: ", 2);
+	ft_putstr_fd(BINARY, 2);
+	ft_putchar_fd(' ', 2);
+	ft_putstr_fd("[-Ralrt] [file ...]\n", 2);
+}
+
 void		check_errno(char *path)
 {
 	print_prefix();
@@ -23,4 +31,13 @@ void		enoent_error(char *filename)
 	ft_putstr_fd(filename, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd("No such file or directory\n", 2);
+}
+
+void		invalid_option(char c)
+{
+	print_prefix();
+	ft_putstr_fd("illegal option -- ", 2);
+	ft_putchar_fd(c, 2);
+	ft_putchar_fd('\n', 2);
+	print_usage();
 }

@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 19:12:27 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 20:10:25 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -80,6 +80,7 @@ int 				get_files(t_flist **list, char *path, char *options, size_t print_arg);
 off_t				get_total(t_flist **list);
 int					fill_infos(t_file *file, char *path, char *options);
 
+void				invalid_option(char c);
 void				check_errno(char *path);
 void				enoent_error(char *filename);
 #endif

@@ -6,17 +6,12 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 20:02:43 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 20:10:37 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-static void		option_error(void)
-{
-	ft_putstr_fd("Invalid option\n", 2);
-}
 
 static int		add_option(char **options, char c)
 {
@@ -34,7 +29,7 @@ static int		add_option(char **options, char c)
 		*options = ft_strrealloc(*options, "t");
 	else
 	{
-		option_error();
+		invalid_option(c);
 		return (-1);
 	}
 	if (*options == NULL)
