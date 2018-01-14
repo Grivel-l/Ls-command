@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 19:33:13 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 20:30:57 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -117,4 +117,9 @@ void		print_flist(t_flist **list_start, char *options)
 		else
 			browse_flist(list_start, options, print_files);
 	}
+}
+
+void		print_file(t_file *file)
+{
+	ft_putstr(file->filename);
 }
