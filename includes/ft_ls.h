@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/13 20:55:19 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 19:12:27 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,8 +66,9 @@ int					free_args(t_flist **list);
 void				free_flist(t_flist **list_start);
 void				free_files(t_list *files);
 
-void				print_arg(t_file *file);
 void				print_time(char *time);
+void				print_arg(t_file *file);
+int					print_link(t_file *file);
 void				print_filetype(mode_t st_mode);
 void				print_permissions(size_t permissions);
 void				print_void_arg(char *arg, char *options);
@@ -76,6 +77,7 @@ void    			print_flist(t_flist **list_start, char *options);
 int					read_dir(t_flist **list, char *path, char *options);
 int 				get_files(t_flist **list, char *path, char *options, size_t print_arg);
 
+off_t				get_total(t_flist **list);
 int					fill_infos(t_file *file, char *path, char *options);
 
 void				check_errno(char *path);
