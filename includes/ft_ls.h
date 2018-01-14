@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 22:15:54 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/15 00:05:25 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,7 @@
 # include <stdio.h>
 # include <grp.h>
 # include <pwd.h>
+# include <sys/syslimits.h>
 # include "../libft/libft.h"
 
 typedef struct		s_file
