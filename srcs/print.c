@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 22:21:38 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 23:08:48 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ static int	print_as_list(t_file *file)
 	ft_putchar(' ');
 	ft_putstr(getgrgid(file->file_info.st_gid)->gr_name);
 	ft_putchar(' ');
-	ft_putnbr(file->file_info.st_size);
+	ft_putofft(file->file_info.st_size);
 	ft_putchar(' ');
 	// print_time(ctime(&(file->file_info.st_mtim.tv_sec)));
 	print_time(ctime(&(file->file_info.st_mtimespec.tv_sec)));

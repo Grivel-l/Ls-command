@@ -6,7 +6,7 @@
 #    By: legrivel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 18:32:02 by legrivel          #+#    #+#              #
-#    Updated: 2017/12/26 20:17:42 by legrivel    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/01/14 23:10:15 by legrivel    ###    #+. /#+    ###.fr      #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJS = ft_isalpha.o ft_memccpy.o ft_memset.o ft_putnbr_fd.o ft_strcmp.o  \
 	   ft_lstiter.o ft_lstmap.o ft_swap_int.o ft_print_tab.o \
 	   ft_print_int_tab.o ft_isspace.o ft_isupper.o ft_strrealloc.o \
 	   ft_tablen.o ft_puttab.o ft_pushstr.o ft_readdir.o ft_lstappend.o \
-	   ft_strtolower.o ft_strcmp_ci.o
+	   ft_strtolower.o ft_strcmp_ci.o ft_putofft.o
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
