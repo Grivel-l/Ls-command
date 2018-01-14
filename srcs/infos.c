@@ -37,7 +37,7 @@ static void	fill_permissions(t_file *file)
 	fill_others_permissions(file);
 }
 
-int		fill_infos(t_file *file, char *path, char *options)
+int		fill_infos(t_file *file, char *path, t_opts options)
 {
 	if (lstat(path, &(file->file_info)) == -1)
 	{
@@ -48,7 +48,7 @@ int		fill_infos(t_file *file, char *path, char *options)
 	}
 	else
 		file->exist = 1;
-	if (ft_strchr(options, 'l') != NULL)
+	if (options.l)
 		fill_permissions(file);
 	return (0);
 }

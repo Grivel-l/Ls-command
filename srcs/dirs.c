@@ -6,14 +6,14 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 21:57:13 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 22:23:05 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int	fill_file(t_list *files, t_flist **list, char *path, char *options, size_t print_arg)
+static int	fill_file(t_list *files, t_flist **list, char *path, t_opts options, size_t print_arg)
 {
 	t_flist	*link;
 	char	*file_path;
@@ -51,7 +51,7 @@ static int	fill_file(t_list *files, t_flist **list, char *path, char *options, s
 	return (0);
 }
 
-static int	recursive(t_flist **list, char *options)
+static int	recursive(t_flist **list, t_opts options)
 {
 	char	*file_path;
 
@@ -71,13 +71,13 @@ static int	recursive(t_flist **list, char *options)
 	return (0);
 }
 
-int			get_files(t_flist **list, char *path, char *options, size_t print_arg)
+int			get_files(t_flist **list, char *path, t_opts options, size_t print_arg)
 {
 	t_list	*files;
 	t_flist	**list_start;
 	t_list	*previous_file;
 
-	if ((files = ft_readdir(path, ft_strchr(options, 'a') != NULL)) == NULL)
+	if ((files = ft_readdir(path, options.a)) == NULL)
 	{
 		check_errno(path);
 		return (errno == EACCES ? -2 : -1);
@@ -102,7 +102,7 @@ int			get_files(t_flist **list, char *path, char *options, size_t print_arg)
 		free(previous_file);
 	}
 	print_flist(list_start, options);
-	if (ft_strchr(options, 'R') != NULL)
+	if (options.R)
 		browse_flist(list_start, options, recursive);
 	browse_flist_suffix(list_start, free_flist);
 	if ((*list_start) == NULL)
@@ -112,7 +112,7 @@ int			get_files(t_flist **list, char *path, char *options, size_t print_arg)
 	return (0);
 }
 
-int			read_dir(t_flist **list, char *path, char *options)
+int			read_dir(t_flist **list, char *path, t_opts options)
 {
 	char	*file_path;
 

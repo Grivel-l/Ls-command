@@ -6,17 +6,15 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:34:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 20:10:50 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 22:23:43 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int	exit_error(t_flist *list, char *options)
+static int	exit_error(t_flist *list)
 {
-	if (options != NULL)
-		ft_strdel(&options);
 	if (list != NULL)
 	{
 		browse_flist_suffix(&list, free_flist);
@@ -28,20 +26,19 @@ static int	exit_error(t_flist *list, char *options)
 int			main(int argc, char **argv)
 {
 	t_flist	*list;
-	char	*options;
+	t_opts	options;
 
 	list = NULL;
-	options = NULL;
 	argc = (size_t)argc;
-	if ((options = get_options(argc, &(argv[1]))) == NULL)
-		return (exit_error(list, options));
+	options = get_options(argc, &(argv[1]));
+	if (options.error)
+		return (exit_error(list));
 	if ((list = get_args_list(argc, &(argv[1]))) == NULL)
-		return (exit_error(list, options));
+		return (exit_error(list));
 	if (browse_flist_path(&list, options, "", read_dir) == -1)
-		return (exit_error(list, options));
-	if (ft_strchr(options, 'l') == NULL)
+		return (exit_error(list));
+	if (!options.l)
 		ft_putchar('\n');
 	free_args(&list);
-	free(options);
 	return (0);
 }

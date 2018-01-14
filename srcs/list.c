@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 00:48:34 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/24 00:48:56 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 22:17:40 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,8 +30,8 @@ t_flist		*new_flist(t_file *file)
 	return (list);
 }
 
-int			browse_reverse_flist(t_flist **list, char *options,
-				int (fun)(t_flist **list, char *options))
+int			browse_reverse_flist(t_flist **list, t_opts options,
+				int (fun)(t_flist **list, t_opts options))
 {
 	if (*list == NULL)
 		return (0);
@@ -44,8 +44,8 @@ int			browse_reverse_flist(t_flist **list, char *options,
 	return (0);
 }
 
-int			browse_flist(t_flist **list, char *options,
-				int (fun)(t_flist **list, char *options))
+int			browse_flist(t_flist **list, t_opts options,
+				int (fun)(t_flist **list, t_opts options))
 {
 	if (*list == NULL)
 		return (0);
@@ -70,8 +70,8 @@ void		browse_flist_suffix(t_flist **list, void (fun)(t_flist **list))
 	}
 }
 
-int			browse_flist_path(t_flist **list, char *options, char *path,
-				int (fun)(t_flist **list, char *path, char *options))
+int			browse_flist_path(t_flist **list, t_opts options, char *path,
+				int (fun)(t_flist **list, char *path, t_opts options))
 {
 	if (*list == NULL)
 		return (0);

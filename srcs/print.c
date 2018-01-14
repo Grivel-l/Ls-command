@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 20:30:57 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 22:21:38 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,13 +38,13 @@ static int	print_as_list(t_file *file)
 	return (0);
 }
 
-static int	print_files(t_flist **list, char *options)
+static int	print_files(t_flist **list, t_opts options)
 {
 	if (!(*list)->file->exist)
 		enoent_error((*list)->file->filename);
 	else
 	{
-		if (ft_strchr(options, 'l') != NULL)
+		if (options.l)
 		{
 			if (print_as_list((*list)->file) == -1)
 				return (-1);
@@ -76,11 +76,11 @@ void		print_arg(t_file *file)
 	}
 }
 
-void		print_void_arg(char *arg, char *options)
+void		print_void_arg(char *arg, t_opts options)
 {
 	ft_putstr(arg);
 	ft_putchar(':');
-	if (ft_strchr(options, 'l') != NULL)
+	if (options.l)
 		ft_putchar('\n');
 }
 
@@ -94,13 +94,13 @@ void		print_total(off_t total)
 	}
 }
 
-void		print_flist(t_flist **list_start, char *options)
+void		print_flist(t_flist **list_start, t_opts options)
 {
 	static size_t	i = 0;
 
 	if (i > 0)
 	{
-		if (ft_strchr(options, 'l') != NULL)
+		if (options.l)
 			ft_putchar('\n');
 		else
 			ft_putstr("\n\n");
@@ -108,11 +108,11 @@ void		print_flist(t_flist **list_start, char *options)
 		i += 1;
 	if (*list_start != NULL)
 	{
-		if (ft_strchr(options, 'R') != NULL)
+		if (options.R)
 			print_arg((*list_start)->file);
-		if (ft_strchr(options, 'l') != NULL)
+		if (options.l)
 			print_total(get_total(list_start));
-		if (ft_strchr(options, 'r') != NULL)
+		if (options.r)
 			browse_reverse_flist(list_start, options, print_files);
 		else
 			browse_flist(list_start, options, print_files);

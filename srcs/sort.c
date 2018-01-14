@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/26 23:54:59 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/13 20:57:42 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 22:22:24 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,7 +60,7 @@ static int	sort(t_file *file, t_list *target, size_t time_sort)
 }
 
 t_flist	*set_flist_link(t_flist **list_start,
-				t_list *files, char *path, char *options)
+				t_list *files, char *path, t_opts options)
 {
 	t_flist	*list;
 	int		sort_result;
@@ -68,7 +68,7 @@ t_flist	*set_flist_link(t_flist **list_start,
 	list = *list_start;
 	while (list != NULL)
 	{
-		if ((sort_result = sort(list->file, files, ft_strchr(options, 't') != NULL)) == -1)
+		if ((sort_result = sort(list->file, files, options.t)) == -1)
 			return (NULL);
 		else if (sort_result == 0)
 		{

@@ -6,34 +6,31 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 20:10:37 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 22:13:54 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int		add_option(char **options, char c)
+static int		add_option(t_opts *options, char c)
 {
-	if (ft_strchr(*options, c) != NULL)
-		return (0);
 	if (c == 'l')
-		*options = ft_strrealloc(*options, "l");
+		options->l = 1;
 	else if (c == 'R')
-		*options = ft_strrealloc(*options, "R");
+		options->R = 1;
 	else if (c == 'a')
-		*options = ft_strrealloc(*options, "a");
+		options->a = 1;
 	else if (c == 'r')
-		*options = ft_strrealloc(*options, "r");
+		options->r = 1;
 	else if (c == 't')
-		*options = ft_strrealloc(*options, "t");
+		options->t = 1;
 	else
 	{
 		invalid_option(c);
+		options->error = 1;
 		return (-1);
 	}
-	if (*options == NULL)
-		return (-1);
 	return (0);
 }
 
@@ -53,16 +50,29 @@ static size_t	get_args_nbr(size_t argc, char **argv)
 	return (args_nbr);
 }
 
-char			*get_options(size_t argc, char **argv)
+static t_opts	set_default_options(void)
+{
+	t_opts	options;
+
+	options.R = 0;
+	options.a = 0;
+	options.l = 0;
+	options.r = 0;
+	options.t = 0;
+	options.error = 0;
+	return (options);
+}
+
+t_opts			get_options(size_t argc, char **argv)
 {
 	size_t	i;
 	char	*pointer;
-	char	*options;
+	t_opts	options;
 
-	i = 0;
-	options = NULL;
-	if ((options = ft_strnew(1)) == NULL || argc-- <= 1)
+	options = set_default_options();
+	if (argc-- <= 1)
 		return (options);
+	i = 0;
 	while (i < argc)
 	{
 		if (argv[i][0] != '-')
@@ -71,8 +81,9 @@ char			*get_options(size_t argc, char **argv)
 		argv[i] += 1;
 		while (*(argv[i]))
 		{
-			if (add_option(&options, *(argv[i])) == -1)
-				return (NULL);
+			add_option(&options, *(argv[i]));
+			if (options.error)
+				return (options);
 			argv[i] += 1;
 		}
 		argv[i] = pointer;

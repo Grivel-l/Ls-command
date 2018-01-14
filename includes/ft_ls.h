@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 21:36:05 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 22:15:54 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,20 +45,30 @@ typedef struct		s_flist
 	struct s_flist	*right;
 }					t_flist;
 
-char				*get_options(size_t argc, char **argv);
+typedef struct		s_opts
+{
+	unsigned char	R;
+	unsigned char	a;
+	unsigned char	l;
+	unsigned char	r;
+	unsigned char	t;
+	unsigned char	error;
+}					t_opts;
+
+t_opts				get_options(size_t argc, char **argv);
 t_flist				*get_args_list(size_t argc, char **argv);
 
 t_file				*new_file(char *filename, char *path, size_t print_arg, size_t is_arg);
 t_flist				*new_flist(t_file *file);
 
 t_flist				*set_flist_link(t_flist **list_start, t_list *files,
-				char *path, char *options);
-int					browse_reverse_flist(t_flist **list, char *options,
-				int (fun)(t_flist **list, char *options));
-int					browse_flist(t_flist **list, char *options,
-				int (fun)(t_flist **list, char *options));
-int					browse_flist_path(t_flist **list, char *options,
-				char *path, int (fun)(t_flist **list, char *path, char *options));
+				char *path, t_opts options);
+int					browse_reverse_flist(t_flist **list, t_opts options,
+				int (fun)(t_flist **list, t_opts options));
+int					browse_flist(t_flist **list, t_opts options,
+				int (fun)(t_flist **list, t_opts options));
+int					browse_flist_path(t_flist **list, t_opts options,
+				char *path, int (fun)(t_flist **list, char *path, t_opts options));
 void				browse_flist_suffix(t_flist **list, void (fun)(t_flist **list));
 
 int					free_args(t_flist **list);
@@ -71,14 +81,14 @@ void				print_file(t_file *file);
 int					print_link(t_file *file);
 void				print_filetype(mode_t st_mode);
 void				print_permissions(size_t permissions);
-void				print_void_arg(char *arg, char *options);
-void    			print_flist(t_flist **list_start, char *options);
+void				print_void_arg(char *arg, t_opts options);
+void    			print_flist(t_flist **list_start, t_opts options);
 
-int					read_dir(t_flist **list, char *path, char *options);
-int 				get_files(t_flist **list, char *path, char *options, size_t print_arg);
+int					read_dir(t_flist **list, char *path, t_opts options);
+int 				get_files(t_flist **list, char *path, t_opts options, size_t print_arg);
 
 off_t				get_total(t_flist **list);
-int					fill_infos(t_file *file, char *path, char *options);
+int					fill_infos(t_file *file, char *path, t_opts options);
 
 void				invalid_option(char c);
 void				check_errno(char *path);
