@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 20:31:06 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 21:47:45 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -123,17 +123,16 @@ int			read_dir(t_flist **list, char *path, char *options)
 		ft_strdel(&file_path);
 		return (-1);
 	}
-	if ((*list)->file->exist && (*list)->file->print_arg && !(*list)->file->is_file)
+	if ((*list)->file->exist && (*list)->file->print_arg && S_ISDIR((*list)->file->file_info.st_mode))
 		print_arg((*list)->file);
-	if (!(*list)->file->is_file && (*list)->file->exist && get_files(&((*list)->file->file_list),
-				file_path, options, (*list)->file->print_arg) == -1)
+	if (S_ISDIR((*list)->file->file_info.st_mode) && (*list)->file->exist && get_files(&((*list)->file->file_list), file_path, options, (*list)->file->print_arg) == -1)
 	{
 		ft_strdel(&file_path);
 		return (-1);
 	}
 	else if (!(*list)->file->exist)
 		enoent_error((*list)->file->filename);
-	if ((*list)->file->is_file)
+	if (!S_ISDIR((*list)->file->file_info.st_mode))
 		print_file((*list)->file);
 	ft_strdel(&file_path);
 	return (0);

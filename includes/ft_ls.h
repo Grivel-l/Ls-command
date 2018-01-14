@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 20:31:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 21:36:05 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,6 @@ typedef struct		s_file
 	size_t			exist;
 	size_t			is_arg;
 	size_t			print_arg;
-	size_t			is_file;
 	size_t			permissions;
 	char			*filename;
 	char			*path;
