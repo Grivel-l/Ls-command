@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/15 00:05:25 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/15 01:05:06 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -57,7 +57,7 @@ typedef struct		s_opts
 }					t_opts;
 
 t_opts				get_options(size_t argc, char **argv);
-t_flist				*get_args_list(size_t argc, char **argv);
+t_flist				*get_args_list(size_t argc, char **argv, t_opts options);
 
 t_file				*new_file(char *filename, char *path, size_t print_arg, size_t is_arg);
 t_flist				*new_flist(t_file *file);
@@ -69,6 +69,8 @@ int					browse_reverse_flist(t_flist **list, t_opts options,
 int					browse_flist(t_flist **list, t_opts options,
 				int (fun)(t_flist **list, t_opts options));
 int					browse_flist_path(t_flist **list, t_opts options,
+				char *path, int (fun)(t_flist **list, char *path, t_opts options));
+int					browse_reverse_flist_path(t_flist **list, t_opts options,
 				char *path, int (fun)(t_flist **list, char *path, t_opts options));
 void				browse_flist_suffix(t_flist **list, void (fun)(t_flist **list));
 

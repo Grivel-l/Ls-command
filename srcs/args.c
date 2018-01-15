@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 22:13:54 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/15 01:00:43 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -92,7 +92,33 @@ t_opts			get_options(size_t argc, char **argv)
 	return (options);
 }
 
-t_flist			*get_args_list(size_t argc, char **argv)
+static int		set_arg(t_flist **list, char *arg, size_t args_nbr, t_flist **pointer, t_opts options)
+{
+	t_flist	*link;
+	t_list	*arg_list;
+
+	if (*pointer == NULL)
+	{
+		if ((*list = new_flist(new_file(arg, "", args_nbr > 1, 1))) == NULL)
+			return (-1);
+		*pointer = *list;
+	}
+	else
+	{
+		if ((arg_list = ft_lstnew(arg, ft_strlen(arg))) == NULL)
+			return (-1);
+		if ((link = set_flist_link(list, arg_list, "", options)) == NULL)
+		{
+			free_files(arg_list);
+			return (-1);
+		}
+		free_files(arg_list);
+		link->file->is_arg = 1;
+		link->file->print_arg = args_nbr > 1;
+	}
+	return (0);
+}
+t_flist			*get_args_list(size_t argc, char **argv, t_opts options)
 {
 	size_t	i;
 	t_flist	*list;
@@ -109,18 +135,8 @@ t_flist			*get_args_list(size_t argc, char **argv)
 		if (argv[i][0] != '-' || (argv[i][0] == '-' && argv[i][1] == '\0') || options_readed)
 		{
 			options_readed = 1;
-			if (pointer == NULL)
-			{
-				if ((list = new_flist(new_file(argv[i], "", args_nbr > 1, 1))) == NULL)
-					return (NULL);
-				pointer = list;
-			}
-			else
-			{
-				if ((list->left = new_flist(new_file(argv[i], "", args_nbr > 1, 1))) == NULL)
-					return (NULL);
-				list = list->left;
-			}
+			if (set_arg(&list, argv[i], args_nbr, &pointer, options) == -1)
+				return (NULL);
 		}
 		i += 1;
 	}

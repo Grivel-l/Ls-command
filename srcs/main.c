@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:34:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 22:23:43 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/15 01:04:07 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,10 +33,18 @@ int			main(int argc, char **argv)
 	options = get_options(argc, &(argv[1]));
 	if (options.error)
 		return (exit_error(list));
-	if ((list = get_args_list(argc, &(argv[1]))) == NULL)
+	if ((list = get_args_list(argc, &(argv[1]), options)) == NULL)
 		return (exit_error(list));
-	if (browse_flist_path(&list, options, "", read_dir) == -1)
-		return (exit_error(list));
+	if (options.r)
+	{
+		if (browse_reverse_flist_path(&list, options, "", read_dir) == -1)
+			return (exit_error(list));
+	}
+	else
+	{
+		if (browse_flist_path(&list, options, "", read_dir) == -1)
+			return (exit_error(list));
+	}
 	if (!options.l)
 		ft_putchar('\n');
 	free_args(&list);
