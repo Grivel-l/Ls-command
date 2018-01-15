@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/26 23:54:59 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 22:22:24 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/15 16:26:40 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,12 +42,6 @@ static int	sort(t_file *file, t_list *target, size_t time_sort)
 {
 	int		are_equal;
 
-	if (ft_strcmp(file->filename, ".") == 0 ||
-		ft_strcmp(file->filename, "..") == 0)
-		return (0);
-	if (ft_strcmp(target->content, ".") == 0 ||
-		ft_strcmp(target->content, "..") == 0)
-		return (1);
 	are_equal = 2;
 	if (time_sort)
 		are_equal = sort_time(file, target);
