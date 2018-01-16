@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 22:23:05 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/16 01:09:25 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -103,7 +103,12 @@ int			get_files(t_flist **list, char *path, t_opts options, size_t print_arg)
 	}
 	print_flist(list_start, options);
 	if (options.R)
-		browse_flist(list_start, options, recursive);
+	{
+		if (options.r)
+			browse_reverse_flist(list_start, options, recursive);
+		else
+			browse_flist(list_start, options, recursive);
+	}
 	browse_flist_suffix(list_start, free_flist);
 	if ((*list_start) == NULL)
 		print_void_arg(path, options);

@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 23:30:13 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/16 01:10:33 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,9 +64,9 @@ static void	putstr_r(char *arg)
 	write(1, arg, ft_strlen(arg) - 1);
 }
 
-static void	print_total(off_t total)
+static void	print_total(off_t total, t_opts options)
 {
-	if (total > 0)
+	if (total > 0 || options.a)
 	{
 		ft_putstr("total ");
 		ft_putnbr(total);
@@ -111,7 +111,7 @@ void		print_flist(t_flist **list_start, t_opts options)
 		if (options.R)
 			print_arg((*list_start)->file);
 		if (options.l)
-			print_total(get_total(list_start));
+			print_total(get_total(list_start), options);
 		if (options.r)
 			browse_reverse_flist(list_start, options, print_files);
 		else
