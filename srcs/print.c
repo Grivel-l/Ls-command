@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/16 01:27:21 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/16 17:25:01 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -117,8 +117,7 @@ void		print_flist(t_flist **list_start, t_opts options)
 		i += 1;
 	if (*list_start != NULL)
 	{
-		if (options.R)
-			print_arg((*list_start)->file);
+		print_arg((*list_start)->file);
 		if (options.l)
 			print_total(get_total(list_start), options);
 		if (options.r)
