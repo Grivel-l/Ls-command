@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/16 01:10:33 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/16 01:27:21 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,9 @@
 
 static int	print_as_list(t_file *file)
 {
+	struct group	*group;
+	struct passwd	*passwd;
+
 	print_filetype(file->file_info.st_mode);
 	print_permissions(file->permissions / 100);
 	print_permissions(file->permissions % 100 / 10);
@@ -22,9 +25,15 @@ static int	print_as_list(t_file *file)
 	ft_putchar(' ');
 	ft_putnbr(file->file_info.st_nlink);
 	ft_putchar(' ');
-	ft_putstr(getpwuid(file->file_info.st_uid)->pw_name);
+	if ((passwd = getpwuid(file->file_info.st_uid)) == NULL)
+		ft_putnbr(file->file_info.st_uid);
+	else
+		ft_putstr(passwd->pw_name);
 	ft_putchar(' ');
-	ft_putstr(getgrgid(file->file_info.st_gid)->gr_name);
+	if ((group = getgrgid(file->file_info.st_gid)) == NULL)
+		ft_putnbr(file->file_info.st_gid);
+	else
+		ft_putstr(group->gr_name);
 	ft_putchar(' ');
 	ft_putofft(file->file_info.st_size);
 	ft_putchar(' ');
