@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/26 23:54:59 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/15 16:26:40 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/16 00:38:17 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,7 @@ static int	sort_time(t_file *file, t_list *target)
 
 static int sort_alpha(t_file *file, t_list *target)
 {
-	return (ft_strcmp(file->filename, target->content) < 0 ? 0 : 1);
+	return (!(ft_strcmp(file->filename, target->content) < 0));
 }
 
 static int	sort(t_file *file, t_list *target, size_t time_sort)

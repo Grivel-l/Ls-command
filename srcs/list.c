@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 00:48:34 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/15 01:04:36 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/16 01:00:45 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,11 +36,11 @@ int			browse_reverse_flist(t_flist **list, t_opts options,
 	if (*list == NULL)
 		return (0);
 	if ((*list)->left != NULL)
-		browse_flist(&((*list)->left), options, fun);
+		browse_reverse_flist(&((*list)->left), options, fun);
 	if (fun(list, options) == -1)
 		return (-1);
 	if ((*list)->right != NULL)
-		browse_flist(&((*list)->right), options, fun);
+		browse_reverse_flist(&((*list)->right), options, fun);
 	return (0);
 }
 
@@ -76,11 +76,11 @@ int			browse_reverse_flist_path(t_flist **list, t_opts options, char *path,
 	if (*list == NULL)
 		return (0);
 	if ((*list)->left != NULL)
-		browse_flist_path(&((*list)->left), options, path, fun);
+		browse_reverse_flist_path(&((*list)->left), options, path, fun);
 	if (fun(list, path, options) == -1)
 		return (-1);
 	if ((*list)->right != NULL)
-		browse_flist_path(&((*list)->right), options, path, fun);
+		browse_reverse_flist_path(&((*list)->right), options, path, fun);
 	return (0);
 }
 
