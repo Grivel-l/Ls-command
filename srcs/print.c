@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/16 17:25:01 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/22 14:00:57 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,9 +35,15 @@ static int	print_as_list(t_file *file)
 	else
 		ft_putstr(group->gr_name);
 	ft_putchar(' ');
-	ft_putofft(file->file_info.st_size);
+	if (S_ISCHR(file->file_info.st_mode) || S_ISBLK(file->file_info.st_mode))
+	{
+		ft_putnbr(minor(file->file_info.st_rdev));
+		ft_putstr(", ");
+		ft_putnbr(major(file->file_info.st_rdev));
+	}
+	else
+		ft_putofft(file->file_info.st_size);
 	ft_putchar(' ');
-	// print_time(ctime(&(file->file_info.st_mtim.tv_sec)));
 	print_time(ctime(&(file->file_info.st_mtimespec.tv_sec)));
 	ft_putchar(' ');
 	ft_putstr(file->filename);
