@@ -30,7 +30,7 @@ void		enoent_error(char *filename)
 	print_prefix();
 	ft_putstr_fd(filename, 2);
 	ft_putstr_fd(": ", 2);
-	ft_putstr_fd("No such file or directory\n", 2);
+	ft_putstr_fd("No such file or directory", 2);
 }
 
 void		invalid_option(char c)
