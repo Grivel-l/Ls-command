@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/22 13:50:18 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/22 14:27:07 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,7 +79,7 @@ int					free_args(t_flist **list);
 void				free_flist(t_flist **list_start);
 void				free_files(t_list *files);
 
-void				print_time(char *time);
+void				print_time(time_t tv_sec, time_t timestamp);
 void				print_arg(t_file *file);
 void				print_file(t_file *file);
 int					print_link(t_file *file);

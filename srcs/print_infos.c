@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/14 18:58:03 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/15 00:02:15 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/22 14:31:50 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,18 +82,29 @@ void	print_permissions(size_t permissions)
 		ft_putchar('-');
 }
 
-void	print_time(char *time)
+void	print_time(time_t tv_sec, time_t timestamp)
 {
 	size_t	i;
+	char	*time;
 
+	time = ctime(&(tv_sec));
 	i = 0;
 	while (*time)
 	{
 		if (i >= 4 && i <= 15)
 			ft_putchar(*time);
-		time += 1;
 		i += 1;
+		time += 1;
+		if (i == 10)
+		{
+			if (timestamp - tv_sec > 15778476)
+			{
+				i += 1;
+				time += 9;
+			}
+		}
 		if (i > 15)
 			break ;
 	}
+	
 }

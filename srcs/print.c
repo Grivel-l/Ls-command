@@ -6,14 +6,14 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/22 14:00:57 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/22 14:26:34 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int	print_as_list(t_file *file)
+static int	print_as_list(t_file *file, time_t timestamp)
 {
 	struct group	*group;
 	struct passwd	*passwd;
@@ -44,7 +44,7 @@ static int	print_as_list(t_file *file)
 	else
 		ft_putofft(file->file_info.st_size);
 	ft_putchar(' ');
-	print_time(ctime(&(file->file_info.st_mtimespec.tv_sec)));
+	print_time(file->file_info.st_mtimespec.tv_sec, timestamp);
 	ft_putchar(' ');
 	ft_putstr(file->filename);
 	if (S_ISLNK(file->file_info.st_mode))
@@ -55,13 +55,16 @@ static int	print_as_list(t_file *file)
 
 static int	print_files(t_flist **list, t_opts options)
 {
+	time_t	timestamp;
+
+	timestamp = time(NULL);
 	if (!(*list)->file->exist)
 		enoent_error((*list)->file->filename);
 	else
 	{
 		if (options.l)
 		{
-			if (print_as_list((*list)->file) == -1)
+			if (print_as_list((*list)->file, timestamp) == -1)
 				return (-1);
 			ft_putchar('\n');
 		}
