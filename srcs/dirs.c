@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/23 19:01:44 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/23 19:32:33 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,7 +88,12 @@ int			get_files(t_flist **list, char *path, t_opts options, size_t print_arg)
 			if ((tmp = new_flist(new_file(path, tmp_path, 1, 0))) == NULL)
 				return (-1);
 			tmp->file->eacces = 1;
-			print_flist(&tmp, options);
+			if (print_flist(&tmp, options) == -1)
+			{
+				ft_strdel(&tmp_path);
+				free_args(&tmp);
+				return (-1);
+			}
 			ft_strdel(&tmp_path);
 			free_args(&tmp);
 			return (-2);
@@ -114,13 +119,20 @@ int			get_files(t_flist **list, char *path, t_opts options, size_t print_arg)
 		free(previous_file->content);
 		free(previous_file);
 	}
-	print_flist(list_start, options);
+	if (print_flist(list_start, options) == -1)
+		return (-1);
 	if (options.R)
 	{
 		if (options.r)
-			browse_reverse_flist(list_start, options, recursive);
+		{
+			if (browse_reverse_flist(list_start, options, recursive) == -1)
+				return (-1);
+		}
 		else
-			browse_flist(list_start, options, recursive);
+		{
+			if (browse_flist(list_start, options, recursive) == -1)
+				return (-1);
+		}
 	}
 	browse_flist_suffix(list_start, free_flist);
 	if ((*list_start) == NULL)
@@ -149,7 +161,13 @@ int			read_dir(t_flist **list, char *path, t_opts options)
 		return (-1);
 	}
 	if (!S_ISDIR((*list)->file->file_info.st_mode))
-		print_flist(list, options);
+	{
+		if (print_flist(list, options) == -1)
+		{
+			ft_strdel(&file_path);
+			return (-1);
+		}
+	}
 	ft_strdel(&file_path);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/23 17:00:51 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/23 19:29:13 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,7 +86,7 @@ int					print_link(t_file *file);
 void				print_filetype(mode_t st_mode);
 void				print_permissions(size_t permissions);
 void				print_void_arg(char *arg, t_opts options);
-void    			print_flist(t_flist **list_start, t_opts options);
+int	    			print_flist(t_flist **list_start, t_opts options);
 
 int					read_dir(t_flist **list, char *path, t_opts options);
 int 				get_files(t_flist **list, char *path, t_opts options, size_t print_arg);

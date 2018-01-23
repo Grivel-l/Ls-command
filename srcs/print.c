@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/23 19:00:51 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/23 19:29:23 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -124,7 +124,7 @@ void		print_void_arg(char *arg, t_opts options)
 		ft_putchar('\n');
 }
 
-void		print_flist(t_flist **list_start, t_opts options)
+int			print_flist(t_flist **list_start, t_opts options)
 {
 	static size_t	i = 0;
 
@@ -144,9 +144,15 @@ void		print_flist(t_flist **list_start, t_opts options)
 			if (options.l)
 				print_total(get_total(list_start), options);
 			if (options.r)
-				browse_reverse_flist(list_start, options, print_files);
+			{
+				if (browse_reverse_flist(list_start, options, print_files) == -1)
+					return (-1);
+			}
 			else
-				browse_flist(list_start, options, print_files);
+			{
+				if (browse_flist(list_start, options, print_files) == -1)
+					return (-1);
+			}
 		}
 		else
 			enoent_error((*list_start)->file->filename);
