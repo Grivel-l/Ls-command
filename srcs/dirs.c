@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/22 14:53:55 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/23 19:01:44 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,14 +73,27 @@ static int	recursive(t_flist **list, t_opts options)
 
 int			get_files(t_flist **list, char *path, t_opts options, size_t print_arg)
 {
+	t_flist	*tmp;
 	t_list	*files;
+	char	*tmp_path;
 	t_flist	**list_start;
 	t_list	*previous_file;
 
 	if ((files = ft_readdir(path, options.a)) == NULL)
 	{
-		check_errno(path);
-		return (errno == EACCES ? -2 : -1);
+		if (errno == EACCES)
+		{
+			if ((tmp_path = ft_strjoin(path, "/")) == NULL)
+				return (-1);
+			if ((tmp = new_flist(new_file(path, tmp_path, 1, 0))) == NULL)
+				return (-1);
+			tmp->file->eacces = 1;
+			print_flist(&tmp, options);
+			ft_strdel(&tmp_path);
+			free_args(&tmp);
+			return (-2);
+		}
+		return (-1);
 	}
 	list_start = list;
 	if (files->content_size == 0)
@@ -135,10 +148,8 @@ int			read_dir(t_flist **list, char *path, t_opts options)
 		ft_strdel(&file_path);
 		return (-1);
 	}
-	else if (!(*list)->file->exist)
+	if (!S_ISDIR((*list)->file->file_info.st_mode))
 		print_flist(list, options);
-	if ((*list)->file->exist && !S_ISDIR((*list)->file->file_info.st_mode))
-		print_file((*list)->file);
 	ft_strdel(&file_path);
 	return (0);
 }
