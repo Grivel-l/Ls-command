@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/22 14:53:56 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/23 19:00:51 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,6 +53,16 @@ static int	print_as_list(t_file *file, time_t timestamp)
 	return (0);
 }
 
+static char	*remove_path(char *filename)
+{
+	size_t	i;
+
+	i = ft_strlen(filename);
+	while (i > 0 && filename[i] != '/')
+		i -= 1;
+	return (i > 0 ? &(filename[i + 1]) : filename);
+}
+
 static int	print_files(t_flist **list, t_opts options)
 {
 	time_t	timestamp;
@@ -60,6 +70,8 @@ static int	print_files(t_flist **list, t_opts options)
 	timestamp = time(NULL);
 	if (!(*list)->file->exist)
 		enoent_error((*list)->file->filename);
+	else if ((*list)->file->eacces)
+		eacces_error(remove_path(&(((*list)->file->filename)[2])));
 	else
 	{
 		if (options.l)
@@ -124,9 +136,9 @@ void		print_flist(t_flist **list_start, t_opts options)
 			ft_putstr("\n\n");
 	}
 	i += 1;
-	if ((*list_start)->file->exist)
+	if (*list_start != NULL)
 	{
-		if (*list_start != NULL)
+		if ((*list_start)->file->exist)
 		{
 			print_arg((*list_start)->file);
 			if (options.l)
@@ -136,12 +148,7 @@ void		print_flist(t_flist **list_start, t_opts options)
 			else
 				browse_flist(list_start, options, print_files);
 		}
+		else
+			enoent_error((*list_start)->file->filename);
 	}
-	else
-		enoent_error((*list_start)->file->filename);
-}
-
-void		print_file(t_file *file)
-{
-	ft_putstr(file->filename);
 }

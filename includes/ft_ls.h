@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/22 14:27:07 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/23 17:00:51 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,6 +32,7 @@ typedef struct		s_file
 {
 	size_t			exist;
 	size_t			is_arg;
+	size_t			eacces;
 	size_t			print_arg;
 	size_t			permissions;
 	char			*filename;
@@ -81,7 +82,6 @@ void				free_files(t_list *files);
 
 void				print_time(time_t tv_sec, time_t timestamp);
 void				print_arg(t_file *file);
-void				print_file(t_file *file);
 int					print_link(t_file *file);
 void				print_filetype(mode_t st_mode);
 void				print_permissions(size_t permissions);
@@ -97,4 +97,5 @@ int					fill_infos(t_file *file, char *path, t_opts options);
 void				invalid_option(char c);
 void				check_errno(char *path);
 void				enoent_error(char *filename);
+void				eacces_error(char *filename);
 #endif

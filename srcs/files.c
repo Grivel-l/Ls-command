@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:51:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/13 20:55:10 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/23 17:01:35 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,7 @@ t_file		*new_file(char *filename, char *path, size_t print_arg, size_t is_arg)
 
 	if ((file = malloc(sizeof(t_file))) == NULL)
 		return (NULL);
+	file->eacces = 0;
 	file->is_arg = is_arg;
 	file->print_arg = print_arg;
 	file->permissions = 0;
