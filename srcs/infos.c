@@ -48,6 +48,7 @@ int		fill_infos(t_file *file, char *path, t_opts options)
 	}
 	else
 		file->exist = 1;
+	file->stats_filled = 1;
 	if (options.l)
 		fill_permissions(file);
 	return (0);

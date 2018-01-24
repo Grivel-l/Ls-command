@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/23 17:31:47 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/24 23:41:24 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -118,6 +118,10 @@ static int		set_arg(t_flist **list, char *arg, size_t args_nbr, t_flist **pointe
 		free_files(arg_list);
 		link->file->is_arg = 1;
 		link->file->print_arg = args_nbr > 1;
+		if (fill_infos(link->file, link->file->filename, options) == -1)
+			return (-1);
+		if (!link->file->exist)
+			enoent_error(link->file->filename);
 	}
 	return (0);
 }

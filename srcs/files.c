@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:51:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/23 17:01:35 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/24 22:56:39 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,7 @@ t_file		*new_file(char *filename, char *path, size_t print_arg, size_t is_arg)
 	file->print_arg = print_arg;
 	file->permissions = 0;
 	file->file_list = NULL;
+	file->stats_filled = 0;
 	if ((file->path = ft_strdup(path)) == NULL)
 		return (NULL);
 	if (filename == NULL)

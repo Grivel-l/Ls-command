@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/23 19:29:13 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/24 22:56:10 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,7 @@ typedef struct		s_file
 	size_t			eacces;
 	size_t			print_arg;
 	size_t			permissions;
+	size_t			stats_filled;
 	char			*filename;
 	char			*path;
 	struct stat		file_info;
