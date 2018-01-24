@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/23 19:29:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/24 21:30:09 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -157,4 +157,5 @@ int			print_flist(t_flist **list_start, t_opts options)
 		else
 			enoent_error((*list_start)->file->filename);
 	}
+	return (0);
 }
