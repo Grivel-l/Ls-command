@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:34:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 02:12:23 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 02:39:58 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ static int	exit_error(t_flist *list)
 		browse_flist_suffix(&list, free_flist);
 		free(list);
 	}
-	return (-1);
+	return (1);
 }
 
 static int	check_existing_file(t_flist **list_start, t_opts options)
