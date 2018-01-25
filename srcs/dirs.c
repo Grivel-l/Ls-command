@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 01:30:53 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 19:18:44 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -157,7 +157,7 @@ int			read_dir(t_flist **list, char *path, t_opts options)
 
 	if ((file_path = ft_strjoin((*list)->file->filename, path)) == NULL)
 		return (-1);
-	if (!(*list)->file->stats_filled && fill_infos((*list)->file, file_path, options) == -1)
+	if (fill_infos((*list)->file, file_path, options) == -1)
 	{
 		ft_strdel(&file_path);
 		return (-1);

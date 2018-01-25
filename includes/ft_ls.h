@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/24 22:56:10 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 18:54:54 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,6 +38,7 @@ typedef struct		s_file
 	size_t			stats_filled;
 	char			*filename;
 	char			*path;
+	char			*error;
 	struct stat		file_info;
 	struct s_flist	*file_list;
 }					t_file;
@@ -99,4 +100,5 @@ void				invalid_option(char c);
 void				check_errno(char *path);
 void				enoent_error(char *filename);
 void				eacces_error(char *filename);
+void				print_error(t_file *file);
 #endif

@@ -14,6 +14,15 @@ static void	print_usage(void)
 	ft_putstr_fd("[-Ralrt] [file ...]\n", 2);
 }
 
+void		print_error(t_file *file)
+{
+	ft_putchar_fd('\n', 2);
+	print_prefix();
+	ft_putstr_fd(file->filename, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(file->error, 2);
+}
+
 void		check_errno(char *path)
 {
 	print_prefix();

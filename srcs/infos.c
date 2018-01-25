@@ -43,8 +43,8 @@ int		fill_infos(t_file *file, char *path, t_opts options)
 	{
 		if (errno == ENOENT)
 			file->exist = 0;
-		else
-			return (-1);
+		file->error = strerror(errno);
+		return (0);
 	}
 	else
 		file->exist = 1;
