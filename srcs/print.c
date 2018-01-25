@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 02:01:13 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 03:44:02 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,9 +37,9 @@ static int	print_as_list(t_file *file, time_t timestamp)
 	ft_putchar(' ');
 	if (S_ISCHR(file->file_info.st_mode) || S_ISBLK(file->file_info.st_mode))
 	{
-		ft_putnbr(minor(file->file_info.st_rdev));
-		ft_putstr(", ");
 		ft_putnbr(major(file->file_info.st_rdev));
+		ft_putstr(", ");
+		ft_putnbr(minor(file->file_info.st_rdev));
 	}
 	else
 		ft_putofft(file->file_info.st_size);
@@ -143,10 +143,7 @@ int			print_flist(t_flist **list_start, t_opts options)
 			if ((*list_start)->file->is_arg)
 			{
 				if(!S_ISDIR((*list_start)->file->file_info.st_mode) && (*list_start)->file->exist)
-				{
-					ft_putstr((*list_start)->file->filename);
-					ft_putchar(' ');
-				}	
+					print_files(list_start, options);
 				else
 					i -= 1;
 				return (0);
