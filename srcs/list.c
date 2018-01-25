@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 00:48:34 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/23 19:00:32 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 02:11:58 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,11 +36,13 @@ int			browse_reverse_flist(t_flist **list, t_opts options,
 	if (*list == NULL)
 		return (0);
 	if ((*list)->left != NULL)
-		browse_reverse_flist(&((*list)->left), options, fun);
+		if (browse_reverse_flist(&((*list)->left), options, fun) == -1)
+			return (-1);
 	if (fun(list, options) == -1)
 		return (-1);
 	if ((*list)->right != NULL)
-		browse_reverse_flist(&((*list)->right), options, fun);
+		if (browse_reverse_flist(&((*list)->right), options, fun) == -1)
+			return (-1);
 	return (0);
 }
 
@@ -50,11 +52,13 @@ int			browse_flist(t_flist **list, t_opts options,
 	if (*list == NULL)
 		return (0);
 	if ((*list)->right != NULL)
-		browse_flist(&((*list)->right), options, fun);
+		if (browse_flist(&((*list)->right), options, fun) == -1)
+			return (-1);
 	if (fun(list, options) == -1)
 		return (-1);
 	if ((*list)->left != NULL)
-		browse_flist(&((*list)->left), options, fun);
+		if (browse_flist(&((*list)->left), options, fun) == -1)
+			return (-1);
 	return (0);
 }
 
@@ -76,11 +80,13 @@ int			browse_reverse_flist_path(t_flist **list, t_opts options, char *path,
 	if (*list == NULL)
 		return (0);
 	if ((*list)->left != NULL)
-		browse_reverse_flist_path(&((*list)->left), options, path, fun);
+		if (browse_reverse_flist_path(&((*list)->left), options, path, fun) == -1)
+			return (-1);
 	if (fun(list, path, options) == -1)
 		return (-1);
 	if ((*list)->right != NULL)
-		browse_reverse_flist_path(&((*list)->right), options, path, fun);
+		if (browse_reverse_flist_path(&((*list)->right), options, path, fun) == -1)
+			return (-1);
 	return (0);
 }
 
@@ -90,10 +96,12 @@ int			browse_flist_path(t_flist **list, t_opts options, char *path,
 	if (*list == NULL)
 		return (0);
 	if ((*list)->right != NULL)
-		browse_flist_path(&((*list)->right), options, path, fun);
+		if (browse_flist_path(&((*list)->right), options, path, fun) == -1)
+			return (-1);
 	if (fun(list, path, options) == -1)
 		return (-1);
 	if ((*list)->left != NULL)
-		browse_flist_path(&((*list)->left), options, path, fun);
+		if (browse_flist_path(&((*list)->left), options, path, fun) == -1)
+			return (-1);
 	return (0);
 }
