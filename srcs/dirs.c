@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:26:37 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 01:10:37 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 01:16:03 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,8 +18,16 @@ static int	fill_file(t_list *files, t_flist **list, char *path, t_opts options, 
 	t_flist	*link;
 	char	*file_path;
 
-	if ((file_path = ft_strjoin(path, "/")) == NULL)
-		return (-1);
+	if (path[0] == '/' && path[1] == '\0')
+	{
+		if ((file_path = ft_strjoin(path, "")) == NULL)
+			return (-1);
+	}
+	else
+	{
+		if ((file_path = ft_strjoin(path, "/")) == NULL)
+			return (-1);
+	}
 	link = NULL;
 	if (*list == NULL)
 	{
