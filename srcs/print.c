@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 19:25:36 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 19:31:18 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,12 +53,24 @@ static int	print_as_list(t_file *file, time_t timestamp)
 	return (0);
 }
 
+static char	*remove_path(char *filename)
+{
+	size_t	i;
+
+	i = ft_strlen(filename);
+	while (i > 0 && filename[i] != '/')
+		i -= 1;
+	return (i > 0 ? &(filename[i + 1]) : filename);
+}
+
 static int	print_files(t_flist **list, t_opts options)
 {
 	time_t	timestamp;
 
 	timestamp = time(NULL);
-	if ((*list)->file->error != NULL)
+	if ((*list)->file->eacces)
+		eacces_error(remove_path(&(((*list)->file->filename)[2])));
+	else if ((*list)->file->error != NULL)
 		print_error((*list)->file);
 	else
 	{
@@ -66,7 +78,6 @@ static int	print_files(t_flist **list, t_opts options)
 		{
 			if (print_as_list((*list)->file, timestamp) == -1)
 				return (-1);
-			ft_putchar('\n');
 		}
 		else
 		{
@@ -74,6 +85,8 @@ static int	print_files(t_flist **list, t_opts options)
 			ft_putstr("  ");
 		}
 	}
+	if (options.l)
+		ft_putchar('\n');
 	return (0);
 }
 
