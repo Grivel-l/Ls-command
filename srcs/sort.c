@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/26 23:54:59 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/23 17:34:43 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 21:46:16 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,8 +21,14 @@ static int	sort_time(t_file *file, t_list *target)
 
 	if ((target_path = ft_strjoin(file->path, target->content)) == NULL)
 		return (-1);
-	if (stat(target_path, &target_info) == -1)
-		return (-1);
+	if (lstat(target_path, &target_info) == -1)
+	{
+		ft_strdel(&target_path);
+		if (errno == ENOENT)
+			file->exist = 0;
+		file->error = strerror(errno);
+		return (0);
+	}
 	ft_strdel(&target_path);
 	result = file->file_info.st_mtimespec.tv_sec - target_info.st_mtimespec.tv_sec;
 	if (result < 0)

@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 19:31:18 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 20:15:00 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -100,7 +100,7 @@ static void	print_total(off_t total, t_opts options)
 	if (total > 0 || options.a)
 	{
 		ft_putstr("total ");
-		ft_putnbr(total);
+		ft_putofft(total);
 		ft_putchar('\n');
 	}
 }
