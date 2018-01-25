@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 00:15:52 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 00:27:28 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,7 +71,11 @@ static int	print_files(t_flist **list, t_opts options)
 	if ((*list)->file->eacces)
 		eacces_error(remove_path(&(((*list)->file->filename)[2])));
 	else if ((*list)->file->error != NULL)
+	{
+		if (!options.l)
+			ft_putchar_fd('\n', 2);
 		print_error((*list)->file);
+	}
 	else
 	{
 		if (options.l)

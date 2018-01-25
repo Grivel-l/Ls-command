@@ -16,7 +16,6 @@ static void	print_usage(void)
 
 void		print_error(t_file *file)
 {
-	ft_putchar_fd('\n', 2);
 	print_prefix();
 	ft_putstr_fd(file->filename, 2);
 	ft_putstr_fd(": ", 2);
