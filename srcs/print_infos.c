@@ -6,16 +6,16 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/14 18:58:03 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 19:20:22 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 23:57:45 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-off_t	get_total(t_flist **list)
+blkcnt_t	get_total(t_flist **list)
 {
-	off_t	total;
+	blkcnt_t	total;
 
 	total = 0;
 	if (*list != NULL)
@@ -29,7 +29,7 @@ off_t	get_total(t_flist **list)
 	return (total);
 }
 
-int		print_link(t_file *file)
+int			print_link(t_file *file)
 {
 	char	buf[PATH_MAX];
 
@@ -41,7 +41,7 @@ int		print_link(t_file *file)
 	return (0);
 }
 
-void	print_filetype(mode_t st_mode)
+void		print_filetype(mode_t st_mode)
 {
 	if (S_ISDIR(st_mode))
 		ft_putchar('d');
@@ -57,7 +57,7 @@ void	print_filetype(mode_t st_mode)
 		ft_putchar('-');
 }
 
-void	print_permissions(size_t permissions)
+void		print_permissions(size_t permissions)
 {
 	if (permissions >= 4)
 	{
@@ -82,7 +82,7 @@ void	print_permissions(size_t permissions)
 		ft_putchar('-');
 }
 
-void	print_time(time_t tv_sec, time_t timestamp)
+void		print_time(time_t tv_sec, time_t timestamp)
 {
 	size_t	i;
 	char	*time;

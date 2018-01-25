@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 19:15:23 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/14 23:14:08 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 00:14:16 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -142,6 +142,7 @@ char				*ft_strrealloc(char *str, char *to_append);
 ** Nbr functions
 */
 void				ft_putofft(off_t nb);
+void				ft_putlonglong(long long nb);
 /*
 ** Nbr functions
 */
