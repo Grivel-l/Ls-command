@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/24 23:41:24 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 01:04:44 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -105,6 +105,10 @@ static int		set_arg(t_flist **list, char *arg, size_t args_nbr, t_flist **pointe
 		if ((*list = new_flist(new_file(arg, "", args_nbr > 1, 1))) == NULL)
 			return (-1);
 		*pointer = *list;
+		if (fill_infos((*list)->file, (*list)->file->filename, options) == -1)
+			return (-1);
+		if (!(*list)->file->exist)
+			enoent_error((*list)->file->filename);
 	}
 	else
 	{
