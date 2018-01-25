@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/24 22:26:02 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 02:01:13 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -128,7 +128,7 @@ int			print_flist(t_flist **list_start, t_opts options)
 {
 	static size_t	i = 0;
 
-	if (i > 0)
+	if (i > 0 && (*list_start == NULL || (*list_start != NULL && !(*list_start)->file->is_arg)))
 	{
 		if (options.l)
 			ft_putchar('\n');
@@ -138,8 +138,19 @@ int			print_flist(t_flist **list_start, t_opts options)
 	i += 1;
 	if (*list_start != NULL)
 	{
-		if ((*list_start)->file->exist)
+		if ((*list_start)->file->exist || (*list_start)->file->is_arg)
 		{
+			if ((*list_start)->file->is_arg)
+			{
+				if(!S_ISDIR((*list_start)->file->file_info.st_mode) && (*list_start)->file->exist)
+				{
+					ft_putstr((*list_start)->file->filename);
+					ft_putchar(' ');
+				}	
+				else
+					i -= 1;
+				return (0);
+			}
 			print_arg((*list_start)->file);
 			if (options.l)
 				print_total(get_total(list_start), options);

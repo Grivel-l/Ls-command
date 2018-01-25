@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 01:04:44 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/25 01:57:21 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,11 +88,20 @@ t_opts			get_options(size_t argc, char **argv)
 					return (options);
 				argv[i] += 1;
 			}
- 		}
+		}
 		argv[i] = pointer;
 		i += 1;
 	}
 	return (options);
+}
+
+static int		treate_arg(t_file *file, t_opts options)
+{
+	if (fill_infos(file, file->filename, options) == -1)
+		return (-1);
+	if (!file->exist)
+		enoent_error(file->filename);
+	return (0);
 }
 
 static int		set_arg(t_flist **list, char *arg, size_t args_nbr, t_flist **pointer, t_opts options)
@@ -105,10 +114,8 @@ static int		set_arg(t_flist **list, char *arg, size_t args_nbr, t_flist **pointe
 		if ((*list = new_flist(new_file(arg, "", args_nbr > 1, 1))) == NULL)
 			return (-1);
 		*pointer = *list;
-		if (fill_infos((*list)->file, (*list)->file->filename, options) == -1)
+		if (treate_arg((*list)->file, options) == -1)
 			return (-1);
-		if (!(*list)->file->exist)
-			enoent_error((*list)->file->filename);
 	}
 	else
 	{
@@ -122,10 +129,8 @@ static int		set_arg(t_flist **list, char *arg, size_t args_nbr, t_flist **pointe
 		free_files(arg_list);
 		link->file->is_arg = 1;
 		link->file->print_arg = args_nbr > 1;
-		if (fill_infos(link->file, link->file->filename, options) == -1)
+		if (treate_arg(link->file, options) == -1)
 			return (-1);
-		if (!link->file->exist)
-			enoent_error(link->file->filename);
 	}
 	return (0);
 }
@@ -151,5 +156,12 @@ t_flist			*get_args_list(size_t argc, char **argv, t_opts options)
 		}
 		i += 1;
 	}
-	return (pointer == NULL ? new_flist(new_file(".", "", 0, 1)) : pointer);
+	if (pointer == NULL)
+	{
+		list = new_flist(new_file(".", "", 0, 1));
+		if (fill_infos(list->file, list->file->filename, options) == -1)
+			return (NULL);
+		return (list);
+	}
+	return (pointer);
 }
