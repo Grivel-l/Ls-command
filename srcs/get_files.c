@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/26 02:01:42 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 02:52:33 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 02:58:00 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,7 +69,7 @@ static int	print_recurse_free(t_flist **list_start,
 {
 	if (print_flist(list_start, options) == -1)
 		return (-1);
-	if (options.R)
+	if (options.re)
 	{
 		if (options.r)
 		{

@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/26 00:40:17 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 01:10:01 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 02:57:40 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@ static int		add_option(t_opts *options, char c)
 	if (c == 'l')
 		options->l = 1;
 	else if (c == 'R')
-		options->R = 1;
+		options->re = 1;
 	else if (c == 'a')
 		options->a = 1;
 	else if (c == 'r')
@@ -38,7 +38,7 @@ static t_opts	set_default_options(void)
 {
 	t_opts	options;
 
-	options.R = 0;
+	options.re = 0;
 	options.a = 0;
 	options.l = 0;
 	options.r = 0;
