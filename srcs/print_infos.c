@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/14 18:58:03 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 01:10:39 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 03:21:55 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,14 +31,20 @@ blkcnt_t	get_total(t_flist **list)
 
 int			print_link(t_file *file)
 {
+	char	*file_path;
 	char	buf[PATH_MAX];
 
-	ft_memset(buf, 0, sizeof(buf));
-	if (readlink(ft_strjoin(file->path, file->filename),
-		buf, PATH_MAX - 1) == -1)
+	if ((file_path = ft_strjoin(file->path, file->filename)) == NULL)
 		return (-1);
+	ft_memset(buf, 0, sizeof(buf));
+	if (readlink(file_path,buf, PATH_MAX - 1) == -1)
+	{
+		ft_strdel(&file_path);
+		return (-1);
+	}
 	ft_putstr(" -> ");
 	ft_putstr(buf);
+	ft_strdel(&file_path);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/12/11 16:25:45 by legrivel     #+#   ##    ##    #+#        #
-#    Updated: 2018/01/26 02:02:21 by legrivel    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/01/26 03:10:56 by legrivel    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -18,7 +18,7 @@ OBJS = $(SRCS:.c=.o)
 SRCS_PATH = ./srcs/
 INCS_PATH = ./includes/
 LIB_PATH = ./libft/
-FLAGS = -Wall -Wextra -Werror -Ofast -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -Ofast
 COMPILER = clang
 
 all: $(NAME)
