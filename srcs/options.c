@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/26 00:40:17 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 00:41:52 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 01:10:01 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,9 +34,9 @@ static int		add_option(t_opts *options, char c)
 	return (0);
 }
 
-static t_opts    set_default_options(void)
+static t_opts	set_default_options(void)
 {
-	t_opts    options;
+	t_opts	options;
 
 	options.R = 0;
 	options.a = 0;
@@ -47,16 +47,14 @@ static t_opts    set_default_options(void)
 	return (options);
 }
 
-t_opts			get_options(size_t argc, char **argv)
+t_opts			get_options(size_t argc, char **argv, size_t i)
 {
-	size_t	i;
 	char	*pointer;
 	t_opts	options;
 
 	options = set_default_options();
 	if (argc-- <= 1)
 		return (options);
-	i = 0;
 	while (i < argc)
 	{
 		if (argv[i][0] != '-')
@@ -73,8 +71,7 @@ t_opts			get_options(size_t argc, char **argv)
 				argv[i] += 1;
 			}
 		}
-		argv[i] = pointer;
-		i += 1;
+		argv[i++] = pointer;
 	}
 	return (options);
 }
