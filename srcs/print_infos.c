@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/14 18:58:03 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 23:57:45 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 01:10:39 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,7 +34,8 @@ int			print_link(t_file *file)
 	char	buf[PATH_MAX];
 
 	ft_memset(buf, 0, sizeof(buf));
-	if (readlink(ft_strjoin(file->path, file->filename), buf, PATH_MAX - 1) == -1)
+	if (readlink(ft_strjoin(file->path, file->filename),
+		buf, PATH_MAX - 1) == -1)
 		return (-1);
 	ft_putstr(" -> ");
 	ft_putstr(buf);
@@ -106,5 +107,4 @@ void		print_time(time_t tv_sec, time_t timestamp)
 		if (i > 15)
 			break ;
 	}
-	
 }

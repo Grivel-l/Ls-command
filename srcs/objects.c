@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:51:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 00:28:40 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 01:11:58 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,4 +37,21 @@ t_file		*new_file(char *filename, char *path,
 	if ((file->filename = ft_strdup(filename)) == NULL)
 		return (NULL);
 	return (file);
+}
+
+t_flist		*new_flist(t_file *file)
+{
+	t_flist	*list;
+
+	if (file == NULL)
+		return (NULL);
+	if ((list = malloc(sizeof(t_flist))) == NULL)
+	{
+		free(file);
+		return (NULL);
+	}
+	list->file = file;
+	list->left = NULL;
+	list->right = NULL;
+	return (list);
 }

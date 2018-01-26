@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:34:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 00:37:45 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 01:08:56 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,7 +56,7 @@ int			main(int argc, char **argv)
 
 	list = NULL;
 	argc = (size_t)argc;
-	options = get_options(argc, &(argv[1]));
+	options = get_options(argc, &(argv[1]), 0);
 	if (options.error)
 		return (exit_error(list));
 	if ((list = get_args_list(argc, &(argv[1]), options)) == NULL)
