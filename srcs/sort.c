@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/26 23:54:59 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 21:46:16 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 01:24:01 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,8 @@ static int	sort_time(t_file *file, t_list *target)
 		return (0);
 	}
 	ft_strdel(&target_path);
-	result = file->file_info.st_mtimespec.tv_sec - target_info.st_mtimespec.tv_sec;
+	result = file->file_info.st_mtimespec.tv_sec
+		- target_info.st_mtimespec.tv_sec;
 	if (result < 0)
 		return (1);
 	else if (result > 0)
@@ -39,7 +40,7 @@ static int	sort_time(t_file *file, t_list *target)
 		return (2);
 }
 
-static int sort_alpha(t_file *file, t_list *target)
+static int	sort_alpha(t_file *file, t_list *target)
 {
 	return (!(ft_strcmp(file->filename, target->content) < 0));
 }
@@ -59,9 +60,40 @@ static int	sort(t_file *file, t_list *target, size_t time_sort)
 		return (are_equal);
 }
 
-t_flist	*set_flist_link(t_flist **list_start,
-				t_list *files, char *path, t_opts options)
+static int	put_element(t_flist **list, int direction, char *content, char *path)
 {
+	if (direction == 0)
+	{
+		if ((*list)->left == NULL)
+		{
+			if (((*list)->left = new_flist(new_file(content, path, 0, 0))) == NULL)
+				return (-1);
+			*list = (*list)->left;
+			return (1);
+		}
+		else
+			*list = (*list)->left;
+	}
+	else
+	{
+		if ((*list)->right == NULL)
+		{
+			if (((*list)->right =
+						new_flist(new_file(content, path, 0, 0))) == NULL)
+				return (-1);
+			*list = (*list)->right;
+			return (1);
+		}
+		else
+			*list = (*list)->right;
+	}
+	return (0);
+}
+
+t_flist		*set_flist_link(t_flist **list_start,
+		t_list *files, char *path, t_opts options)
+{
+	int		ret;
 	t_flist	*list;
 	int		sort_result;
 
@@ -70,31 +102,13 @@ t_flist	*set_flist_link(t_flist **list_start,
 	{
 		if ((sort_result = sort(list->file, files, options.t)) == -1)
 			return (NULL);
-		else if (sort_result == 0)
-		{
-			if (list->left == NULL)
-			{
-				if ((list->left =
-			new_flist(new_file(files->content, path, 0, 0))) == NULL)
-					return (NULL);
-				list = list->left;
-				break ;
-			}
-			else
-				list = list->left;
-		}
 		else
 		{
-			if (list->right == NULL)
-			{
-				if ((list->right =
-			new_flist(new_file(files->content, path, 0, 0))) == NULL)
-					return (NULL);
-				list = list->right;
+			ret = put_element(&list, sort_result, files->content, path);
+			if (ret == 1)
 				break ;
-			}
-			else
-				list = list->right;
+			else if (ret == -1)
+				return (NULL);
 		}
 	}
 	return (list);
