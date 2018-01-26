@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/26 02:01:42 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 02:28:56 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 02:52:33 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@ static int	recursive(t_flist **list, t_opts options)
 	t_arg	path;
 
 	if ((path.content =
-				ft_strjoin((*list)->file->path, (*list)->file->filename)) == NULL)
+	ft_strjoin((*list)->file->path, (*list)->file->filename)) == NULL)
 		return (-1);
 	if (S_ISDIR((*list)->file->file_info.st_mode) &&
 			ft_strcmp((*list)->file->filename, ".") != 0 &&
@@ -35,21 +35,17 @@ static int	recursive(t_flist **list, t_opts options)
 	return (0);
 }
 
-int			get_files(t_flist **list, t_arg path_arg, t_opts options)
+static int	readfiles(t_list **files, t_arg path_arg, t_opts options)
 {
 	t_flist	*tmp;
-	t_list	*files;
 	char	*tmp_path;
-	t_flist	**list_start;
-	t_list	*previous_file;
 
-	if ((files = ft_readdir(path_arg.content, options.a)) == NULL)
+	if ((*files = ft_readdir(path_arg.content, options.a)) == NULL)
 	{
 		if (errno == EACCES)
 		{
-			if ((tmp_path = ft_strjoin(path_arg.content, "/")) == NULL)
-				return (-1);
-			if ((tmp = new_flist(new_file(path_arg.content, tmp_path, 1, 0))) == NULL)
+			if ((tmp_path = ft_strjoin(path_arg.content, "/")) == NULL ||
+	(tmp = new_flist(new_file(path_arg.content, tmp_path, 1, 0))) == NULL)
 				return (-1);
 			tmp->file->eacces = 1;
 			tmp->file->print_arg = path_arg.nbr;
@@ -65,25 +61,12 @@ int			get_files(t_flist **list, t_arg path_arg, t_opts options)
 		}
 		return (-1);
 	}
-	list_start = list;
-	if (files->content_size == 0)
-	{
-		free(files->content);
-		free(files);
-		files = NULL;
-	}
-	while (files != NULL)
-	{
-		if (fill_file(files, list_start, path_arg, options) == -1)
-		{
-			free_files(files);
-			return (-1);
-		}
-		previous_file = files;
-		files = files->next;
-		free(previous_file->content);
-		free(previous_file);
-	}
+	return (0);
+}
+
+static int	print_recurse_free(t_flist **list_start,
+	t_arg path_arg, t_opts options)
+{
 	if (print_flist(list_start, options) == -1)
 		return (-1);
 	if (options.R)
@@ -105,4 +88,30 @@ int			get_files(t_flist **list, t_arg path_arg, t_opts options)
 	free(*list_start);
 	*list_start = NULL;
 	return (0);
+}
+
+int			get_files(t_flist **list, t_arg path_arg, t_opts options)
+{
+	int		ret;
+	t_list	*files;
+	t_flist	**list_start;
+	t_list	*previous_file;
+
+	if ((ret = readfiles(&files, path_arg, options)) != 0)
+		return (ret);
+	list_start = list;
+	if (files->content_size == 0)
+		free_tlist(&files);
+	while (files != NULL)
+	{
+		if (fill_file(files, list_start, path_arg, options) == -1)
+		{
+			free_files(files);
+			return (-1);
+		}
+		previous_file = files;
+		files = files->next;
+		free_tlist(&previous_file);
+	}
+	return (print_recurse_free(list_start, path_arg, options));
 }

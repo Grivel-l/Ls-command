@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:04:19 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 00:32:58 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 02:54:19 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -78,4 +78,11 @@ void	free_flist(t_flist **list_start)
 		free(list->right);
 		list->right = NULL;
 	}
+}
+
+void	free_tlist(t_list **list)
+{
+	free((*list)->content);
+	free(*list);
+	*list = NULL;
 }
