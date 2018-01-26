@@ -6,14 +6,15 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:51:52 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 18:42:00 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 00:28:40 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_file		*new_file(char *filename, char *path, size_t print_arg, size_t is_arg)
+t_file		*new_file(char *filename, char *path,
+		size_t print_arg, size_t is_arg)
 {
 	t_file	*file;
 

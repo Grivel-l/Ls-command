@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/23 23:34:58 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 02:39:58 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 00:37:45 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,6 +31,24 @@ static int	check_existing_file(t_flist **list_start, t_opts options)
 	return (0);
 }
 
+static int	print_reverse(t_flist **list, t_opts options)
+{
+	if (browse_reverse_flist(list, options, print_flist) == -1)
+		return (-1);
+	if (browse_reverse_flist_path(list, options, "", read_dir) == -1)
+		return (-1);
+	return (0);
+}
+
+static int	print(t_flist **list, t_opts options)
+{
+	if (browse_flist(list, options, print_flist) == -1)
+		return (-1);
+	if (browse_flist_path(list, options, "", read_dir) == -1)
+		return (-1);
+	return (0);
+}
+
 int			main(int argc, char **argv)
 {
 	t_flist	*list;
@@ -45,16 +63,12 @@ int			main(int argc, char **argv)
 		return (exit_error(list));
 	if (options.r)
 	{
-		if (browse_reverse_flist(&list, options, print_flist) == -1)
-			return (exit_error(list));
-		if (browse_reverse_flist_path(&list, options, "", read_dir) == -1)
+		if (print_reverse(&list, options) == -1)
 			return (exit_error(list));
 	}
 	else
 	{
-		if (browse_flist(&list, options, print_flist) == -1)
-			return (exit_error(list));
-		if (browse_flist_path(&list, options, "", read_dir) == -1)
+		if (print(&list, options) == -1)
 			return (exit_error(list));
 	}
 	if (!options.l && browse_flist(&list, options, check_existing_file) == -1)

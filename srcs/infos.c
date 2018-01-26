@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   infos.c                                          .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/01/26 00:32:15 by legrivel     #+#   ##    ##    #+#       */
+/*   Updated: 2018/01/26 00:37:54 by legrivel    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 static void	fill_others_permissions(t_file *file)
@@ -37,7 +50,7 @@ static void	fill_permissions(t_file *file)
 	fill_others_permissions(file);
 }
 
-int		fill_infos(t_file *file, char *path, t_opts options)
+int			fill_infos(t_file *file, char *path, t_opts options)
 {
 	if (lstat(path, &(file->file_info)) == -1)
 	{

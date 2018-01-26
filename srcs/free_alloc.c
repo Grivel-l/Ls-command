@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:04:19 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 21:40:22 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 00:32:58 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,7 +33,7 @@ int		free_args(t_flist **list)
 	return (0);
 }
 
-void		free_files(t_list *files)
+void	free_files(t_list *files)
 {
 	t_list	*previous_file;
 
@@ -62,7 +62,7 @@ void	free_file(t_file **file)
 	}
 }
 
-void		free_flist(t_flist **list_start)
+void	free_flist(t_flist **list_start)
 {
 	t_flist	*list;
 
