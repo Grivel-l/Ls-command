@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 00:27:28 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 01:30:50 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -133,7 +133,8 @@ int			print_flist(t_flist **list_start, t_opts options)
 {
 	static size_t	i = 0;
 
-	if (i > 0 && (*list_start == NULL || (*list_start != NULL && !(*list_start)->file->is_arg)))
+	if (i > 0 && (*list_start == NULL ||
+			(*list_start != NULL && !(*list_start)->file->is_arg)))
 	{
 		if (options.l)
 			ft_putchar('\n');
@@ -147,7 +148,8 @@ int			print_flist(t_flist **list_start, t_opts options)
 		{
 			if ((*list_start)->file->is_arg)
 			{
-				if(!S_ISDIR((*list_start)->file->file_info.st_mode) && (*list_start)->file->exist)
+				if (!S_ISDIR((*list_start)->file->file_info.st_mode) &&
+					(*list_start)->file->exist)
 					print_files(list_start, options);
 				else
 					i -= 1;
@@ -158,7 +160,8 @@ int			print_flist(t_flist **list_start, t_opts options)
 				print_total(get_total(list_start), options);
 			if (options.r)
 			{
-				if (browse_reverse_flist(list_start, options, print_files) == -1)
+				if (browse_reverse_flist(list_start,
+						options, print_files) == -1)
 					return (-1);
 			}
 			else
