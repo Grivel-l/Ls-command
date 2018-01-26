@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 16:54:09 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/25 23:58:13 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 01:58:33 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,7 +60,13 @@ typedef struct		s_opts
 	unsigned char	error;
 }					t_opts;
 
-t_opts				get_options(size_t argc, char **argv);
+typedef struct		s_arg
+{
+	size_t			nbr;
+	char			*content;
+}					t_arg;
+
+t_opts				get_options(size_t argc, char **argv, size_t i);
 t_flist				*get_args_list(size_t argc, char **argv, t_opts options);
 
 t_file				*new_file(char *filename, char *path, size_t print_arg, size_t is_arg);
@@ -88,6 +94,8 @@ int					print_link(t_file *file);
 void				print_filetype(mode_t st_mode);
 void				print_permissions(size_t permissions);
 void				print_void_arg(char *arg, t_opts options);
+void				print_total(blkcnt_t total, t_opts options);
+int					print_as_list(t_file *file, time_t timestamp);
 int	    			print_flist(t_flist **list_start, t_opts options);
 
 int					read_dir(t_flist **list, char *path, t_opts options);
@@ -97,7 +105,6 @@ blkcnt_t			get_total(t_flist **list);
 int					fill_infos(t_file *file, char *path, t_opts options);
 
 void				invalid_option(char c);
-void				check_errno(char *path);
 void				enoent_error(char *filename);
 void				eacces_error(char *filename);
 void				print_error(t_file *file);

@@ -6,14 +6,14 @@
 #    By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/12/11 16:25:45 by legrivel     #+#   ##    ##    #+#        #
-#    Updated: 2018/01/25 02:26:49 by legrivel    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/01/26 01:57:49 by legrivel    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
 NAME = ft_ls
-SRCS = main.c args.c files.c list.c free_alloc.c print.c dirs.c errors.c \
-	   sort.c infos.c print_infos.c
+SRCS = main.c args.c objects.c list.c free_alloc.c print.c dirs.c errors.c \
+	   sort.c infos.c print_infos.c options.c print2.c
 OBJS = $(SRCS:.c=.o)
 SRCS_PATH = ./srcs/
 INCS_PATH = ./includes/
