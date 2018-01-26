@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/26 23:54:59 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 01:24:01 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/26 01:26:39 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,13 +60,13 @@ static int	sort(t_file *file, t_list *target, size_t time_sort)
 		return (are_equal);
 }
 
-static int	put_element(t_flist **list, int direction, char *content, char *path)
+static int	put_element(t_flist **list, int direction, char *c, char *p)
 {
 	if (direction == 0)
 	{
 		if ((*list)->left == NULL)
 		{
-			if (((*list)->left = new_flist(new_file(content, path, 0, 0))) == NULL)
+			if (((*list)->left = new_flist(new_file(c, p, 0, 0))) == NULL)
 				return (-1);
 			*list = (*list)->left;
 			return (1);
@@ -78,8 +78,7 @@ static int	put_element(t_flist **list, int direction, char *content, char *path)
 	{
 		if ((*list)->right == NULL)
 		{
-			if (((*list)->right =
-						new_flist(new_file(content, path, 0, 0))) == NULL)
+			if (((*list)->right = new_flist(new_file(c, p, 0, 0))) == NULL)
 				return (-1);
 			*list = (*list)->right;
 			return (1);
