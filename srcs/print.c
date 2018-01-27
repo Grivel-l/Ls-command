@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/24 01:18:53 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 01:57:12 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/27 18:29:47 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ static int	print_files(t_flist **list, t_opts options)
 
 	timestamp = time(NULL);
 	if ((*list)->file->eacces)
-		eacces_error(remove_path(&(((*list)->file->filename)[2])));
+		eacces_error(remove_path(((*list)->file->filename)));
 	else if ((*list)->file->error != NULL)
 	{
 		if (!options.l)
@@ -89,7 +89,8 @@ int			print_flist(t_flist **list_start, t_opts options)
 	print_newlines(*list_start, options, &i);
 	if (*list_start != NULL)
 	{
-		if ((*list_start)->file->exist || (*list_start)->file->is_arg)
+		if ((*list_start)->file->exist ||
+			(*list_start)->file->eacces || (*list_start)->file->is_arg)
 		{
 			if ((*list_start)->file->is_arg)
 			{
