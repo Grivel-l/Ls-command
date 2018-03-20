@@ -6,7 +6,7 @@
 /*   By: legrivel <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 23:19:10 by legrivel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 01:02:34 by legrivel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/20 01:07:04 by legrivel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,7 +77,8 @@ static t_flist	*check_void_list(t_flist *list,
 {
 	if (pointer == NULL)
 	{
-		list = new_flist(new_file(".", "", 0, 1));
+		if ((list = new_flist(new_file(".", "", 0, 1))) == NULL)
+			return (NULL);
 		if (fill_infos(list->file, list->file->filename, options) == -1)
 			return (NULL);
 		return (list);
